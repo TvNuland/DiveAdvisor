@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */; };
+		4304D1D01EF17E5C00D96935 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1CF1EF17E5C00D96935 /* ViewController.swift */; };
+		4304D1D31EF17E5C00D96935 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D11EF17E5C00D96935 /* Main.storyboard */; };
+		4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */; };
+		4304D1D81EF17E5C00D96935 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D71EF17E5C00D96935 /* Assets.xcassets */; };
+		4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */; };
+		4304D1E61EF17E5D00D96935 /* DiveAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1E51EF17E5D00D96935 /* DiveAdvisorTests.swift */; };
+		4304D1F11EF17E5D00D96935 /* DiveAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4304D1E21EF17E5D00D96935 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4304D1C21EF17E5B00D96935 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4304D1C91EF17E5C00D96935;
+			remoteInfo = DiveAdvisor;
+		};
+		4304D1ED1EF17E5D00D96935 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4304D1C21EF17E5B00D96935 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4304D1C91EF17E5C00D96935;
+			remoteInfo = DiveAdvisor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4304D1CA1EF17E5C00D96935 /* DiveAdvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiveAdvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4304D1CF1EF17E5C00D96935 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4304D1D21EF17E5C00D96935 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4304D1D51EF17E5C00D96935 /* DiveAdvisor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiveAdvisor.xcdatamodel; sourceTree = "<group>"; };
+		4304D1D71EF17E5C00D96935 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4304D1DA1EF17E5C00D96935 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4304D1DC1EF17E5C00D96935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4304D1E11EF17E5D00D96935 /* DiveAdvisorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiveAdvisorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304D1E51EF17E5D00D96935 /* DiveAdvisorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveAdvisorTests.swift; sourceTree = "<group>"; };
+		4304D1E71EF17E5D00D96935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4304D1EC1EF17E5D00D96935 /* DiveAdvisorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiveAdvisorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveAdvisorUITests.swift; sourceTree = "<group>"; };
+		4304D1F21EF17E5D00D96935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4304D1C71EF17E5C00D96935 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1DE1EF17E5D00D96935 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1E91EF17E5D00D96935 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4304D1C11EF17E5B00D96935 = {
+			isa = PBXGroup;
+			children = (
+				4304D1CC1EF17E5C00D96935 /* DiveAdvisor */,
+				4304D1E41EF17E5D00D96935 /* DiveAdvisorTests */,
+				4304D1EF1EF17E5D00D96935 /* DiveAdvisorUITests */,
+				4304D1CB1EF17E5C00D96935 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4304D1CB1EF17E5C00D96935 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4304D1CA1EF17E5C00D96935 /* DiveAdvisor.app */,
+				4304D1E11EF17E5D00D96935 /* DiveAdvisorTests.xctest */,
+				4304D1EC1EF17E5D00D96935 /* DiveAdvisorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4304D1CC1EF17E5C00D96935 /* DiveAdvisor */ = {
+			isa = PBXGroup;
+			children = (
+				4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */,
+				4304D1CF1EF17E5C00D96935 /* ViewController.swift */,
+				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
+				4304D1D71EF17E5C00D96935 /* Assets.xcassets */,
+				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
+				4304D1DC1EF17E5C00D96935 /* Info.plist */,
+				4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */,
+			);
+			path = DiveAdvisor;
+			sourceTree = "<group>";
+		};
+		4304D1E41EF17E5D00D96935 /* DiveAdvisorTests */ = {
+			isa = PBXGroup;
+			children = (
+				4304D1E51EF17E5D00D96935 /* DiveAdvisorTests.swift */,
+				4304D1E71EF17E5D00D96935 /* Info.plist */,
+			);
+			path = DiveAdvisorTests;
+			sourceTree = "<group>";
+		};
+		4304D1EF1EF17E5D00D96935 /* DiveAdvisorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */,
+				4304D1F21EF17E5D00D96935 /* Info.plist */,
+			);
+			path = DiveAdvisorUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4304D1C91EF17E5C00D96935 /* DiveAdvisor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4304D1F51EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisor" */;
+			buildPhases = (
+				4304D1C61EF17E5C00D96935 /* Sources */,
+				4304D1C71EF17E5C00D96935 /* Frameworks */,
+				4304D1C81EF17E5C00D96935 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiveAdvisor;
+			productName = DiveAdvisor;
+			productReference = 4304D1CA1EF17E5C00D96935 /* DiveAdvisor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4304D1E01EF17E5D00D96935 /* DiveAdvisorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4304D1F81EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisorTests" */;
+			buildPhases = (
+				4304D1DD1EF17E5D00D96935 /* Sources */,
+				4304D1DE1EF17E5D00D96935 /* Frameworks */,
+				4304D1DF1EF17E5D00D96935 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4304D1E31EF17E5D00D96935 /* PBXTargetDependency */,
+			);
+			name = DiveAdvisorTests;
+			productName = DiveAdvisorTests;
+			productReference = 4304D1E11EF17E5D00D96935 /* DiveAdvisorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4304D1EB1EF17E5D00D96935 /* DiveAdvisorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4304D1FB1EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisorUITests" */;
+			buildPhases = (
+				4304D1E81EF17E5D00D96935 /* Sources */,
+				4304D1E91EF17E5D00D96935 /* Frameworks */,
+				4304D1EA1EF17E5D00D96935 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4304D1EE1EF17E5D00D96935 /* PBXTargetDependency */,
+			);
+			name = DiveAdvisorUITests;
+			productName = DiveAdvisorUITests;
+			productReference = 4304D1EC1EF17E5D00D96935 /* DiveAdvisorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4304D1C21EF17E5B00D96935 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "ben smith";
+				TargetAttributes = {
+					4304D1C91EF17E5C00D96935 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					4304D1E01EF17E5D00D96935 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4304D1C91EF17E5C00D96935;
+					};
+					4304D1EB1EF17E5D00D96935 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4304D1C91EF17E5C00D96935;
+					};
+				};
+			};
+			buildConfigurationList = 4304D1C51EF17E5B00D96935 /* Build configuration list for PBXProject "DiveAdvisor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4304D1C11EF17E5B00D96935;
+			productRefGroup = 4304D1CB1EF17E5C00D96935 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4304D1C91EF17E5C00D96935 /* DiveAdvisor */,
+				4304D1E01EF17E5D00D96935 /* DiveAdvisorTests */,
+				4304D1EB1EF17E5D00D96935 /* DiveAdvisorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4304D1C81EF17E5C00D96935 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */,
+				4304D1D81EF17E5C00D96935 /* Assets.xcassets in Resources */,
+				4304D1D31EF17E5C00D96935 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1DF1EF17E5D00D96935 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1EA1EF17E5D00D96935 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4304D1C61EF17E5C00D96935 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */,
+				4304D1D01EF17E5C00D96935 /* ViewController.swift in Sources */,
+				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1DD1EF17E5D00D96935 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4304D1E61EF17E5D00D96935 /* DiveAdvisorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304D1E81EF17E5D00D96935 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4304D1F11EF17E5D00D96935 /* DiveAdvisorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4304D1E31EF17E5D00D96935 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4304D1C91EF17E5C00D96935 /* DiveAdvisor */;
+			targetProxy = 4304D1E21EF17E5D00D96935 /* PBXContainerItemProxy */;
+		};
+		4304D1EE1EF17E5D00D96935 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4304D1C91EF17E5C00D96935 /* DiveAdvisor */;
+			targetProxy = 4304D1ED1EF17E5D00D96935 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4304D1D11EF17E5C00D96935 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4304D1D21EF17E5C00D96935 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4304D1DA1EF17E5C00D96935 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4304D1F31EF17E5D00D96935 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4304D1F41EF17E5D00D96935 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4304D1F61EF17E5D00D96935 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DiveAdvisor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4304D1F71EF17E5D00D96935 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DiveAdvisor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		4304D1F91EF17E5D00D96935 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DiveAdvisorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiveAdvisor.app/DiveAdvisor";
+			};
+			name = Debug;
+		};
+		4304D1FA1EF17E5D00D96935 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DiveAdvisorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiveAdvisor.app/DiveAdvisor";
+			};
+			name = Release;
+		};
+		4304D1FC1EF17E5D00D96935 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = DiveAdvisorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DiveAdvisor;
+			};
+			name = Debug;
+		};
+		4304D1FD1EF17E5D00D96935 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = DiveAdvisorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.DiveAdvisorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DiveAdvisor;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4304D1C51EF17E5B00D96935 /* Build configuration list for PBXProject "DiveAdvisor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304D1F31EF17E5D00D96935 /* Debug */,
+				4304D1F41EF17E5D00D96935 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4304D1F51EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304D1F61EF17E5D00D96935 /* Debug */,
+				4304D1F71EF17E5D00D96935 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4304D1F81EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304D1F91EF17E5D00D96935 /* Debug */,
+				4304D1FA1EF17E5D00D96935 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4304D1FB1EF17E5D00D96935 /* Build configuration list for PBXNativeTarget "DiveAdvisorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304D1FC1EF17E5D00D96935 /* Debug */,
+				4304D1FD1EF17E5D00D96935 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4304D1D51EF17E5C00D96935 /* DiveAdvisor.xcdatamodel */,
+			);
+			currentVersion = 4304D1D51EF17E5C00D96935 /* DiveAdvisor.xcdatamodel */;
+			path = DiveAdvisor.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4304D1C21EF17E5B00D96935 /* Project object */;
+}
