@@ -8,14 +8,10 @@
 
 import CoreData
 
-enum CoreDataError: Error {
-    case omdbRequest(details: String)
-}
-
 class CoredataManager {
     
-    static let coreDataContainerName = "DiveAdvisor"
-    static let sharedInstance = CoredataManager()
+    private static let coreDataContainerName = "DiveAdvisor"
+    private static let sharedInstance = CoredataManager()
     
     private init() {
     }
@@ -25,24 +21,20 @@ class CoredataManager {
         container.loadPersistentStores(completionHandler: {
             (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("Unresolved error for CoreData container \(error), \(error.userInfo)")
             }
         })
         return container
     }()
     
-    private func saveContext() {
+    private func saveContext() throws {
         let context = persistentContainer.viewContext
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch  {
-                let error = error as NSError
-                fatalError ( "Unresolved error \(error), \(error.userInfo)") }
+            try context.save()
         }
     }
     
-    func storeDiveDetails(for details: DiveDetails) {
+    func storeDiveDetails(for details: DiveDetails) throws {
         let context = persistentContainer.viewContext
         context.performAndWait {
             let detailsManagedObject = DiveDetails(context: context)
@@ -52,27 +44,28 @@ class CoredataManager {
             detailsManagedObject.normalTemperature = details.normalTemperature
             detailsManagedObject.waterTemperature = details.waterTemperature
         }
-        saveContext()
-   }
+        try saveContext()
+    }
     
-    func deleteDiveDetails(for details: DiveDetails) {
+    func deleteDiveDetails(for details: DiveDetails) throws {
         let context = persistentContainer.viewContext
         context.delete(details)
-        saveContext()
+        try saveContext()
     }
     
     func loadDiveDetails(for diveSiteID: Int) -> DiveDetails {
+        let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<DiveDetails> = DiveDetails.fetchRequest()
-        
         let predicate = NSPredicate(format: "\(#keyPath(DiveDetails.id)) == \(diveSiteID)")
         fetchRequest.predicate = predicate
-        
-        var fetchedDetails: [DiveDetails]?
-        let context = persistentContainer.viewContext
-        
+        var fetchedDetails: [DiveDetails] = []
         context.performAndWait {
-            fetchedDetails = try? fetchRequest.execute()
+            do {
+                fetchedDetails = try fetchRequest.execute()
+            } catch let error as NSError {
+                fatalError ("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
+            }
         }
-        return fetchedDetails!.first!
+        return fetchedDetails.first!
     }
 }
