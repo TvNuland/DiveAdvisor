@@ -20,22 +20,40 @@ enum SearchTerm {
 
 struct DAUrlCreator {
     private static let baseURLstring = "http://api.divesites.com/"
-    private static let APImode = "?mode="
+//    private static let APImodeSearch = "?mode=search&s"
+//    private static let APImodeSite = "?mode=site&s"
+//    private static let APImodeDetail = "?mode=detail&s"
+
+    private static func searchMode(by term: SearchTerm) -> URLQueryItem? {
+        switch term {
+        case .bySearchName:
+            return URLQueryItem(name: "mode", value: "search")
+        case .bySearchByCoordDist:
+            return URLQueryItem(name: "mode", value: "sites")
+        case .bySearchID(let searchMode):
+            return URLQueryItem(name: "mode", value: "detail")
+        }
+        
+    }
     
     private static func searchQuery(by term: SearchTerm) -> URLQueryItem? {
         switch term {
         case .bySearchName(let title):
-            return URLQueryItem(name: "search&str", value: title)
+            return URLQueryItem(name: "str", value: title)
         default:
             return nil
         }
     }
 
 
-    private static func searchByCoordDist(by term: SearchTerm) -> URLQueryItem? {
+    private static func searchByCoordDist(by term: SearchTerm) -> [URLQueryItem]? {
         switch term {
         case .bySearchByCoordDist(let lat, let lng, let dist):
-            return URLQueryItem(name: "sites&", value: lat, lng, dist)
+            var gpsQuery: [URLQueryItem] = []
+            gpsQuery.append(URLQueryItem(name: "lat", value: String(lat)))
+            gpsQuery.append(URLQueryItem(name: "lng", value: String(lng)))
+            gpsQuery.append(URLQueryItem(name: "dist", value: String(dist)))
+            return gpsQuery
         default:
             return nil
         }
@@ -44,7 +62,7 @@ struct DAUrlCreator {
     private static func searchByID(by term: SearchTerm) -> URLQueryItem? {
         switch term {
         case .bySearchID(let ID):
-            return URLQueryItem(name: "detail&detail", value: ID)
+            return URLQueryItem(name: "detail", value: String(ID))
         default:
             return nil
         }
@@ -55,28 +73,22 @@ struct DAUrlCreator {
         var urlcomps = URLComponents(string: DAUrlCreator.baseURLstring)!
         var queryItems = [URLQueryItem]()
         
-        
-        let baseParams = ["scheme" : "http",
-                          "host" : "divesites.com",
-                          "path" : "",
-                          "apikey" : DAUrlCreator.APImode]
-        for (key, value) in  baseParams {
-            let item = URLQueryItem(name: key, value: value)
-            queryItems.append(item)
-        }
-
-        
-        let searchQuery = DAUrlCreator.searchQuery(by: term)
-        queryItems.append(searchQuery!)
-        
-        if let byLocation = DAUrlCreator.searchByCoordDist(by: term) {
-            queryItems.append(byLocation)
+        if  let searchModes = DAUrlCreator.searchMode(by: term) {
+            queryItems.append(searchModes)
         }
         
+        if let searchQuery = DAUrlCreator.searchQuery(by: term) {
+            queryItems.append(searchQuery)
+        }
         
+        if let searchByCoordDist = DAUrlCreator.searchByCoordDist(by: term) {
+            for item in searchByCoordDist{
+                queryItems.append(item)
+            }
+        }
         urlcomps.queryItems = queryItems
-                let test = urlcomps.queryItems
-                print(test!)
+        let test = urlcomps.queryItems
+        print(test!)
         return urlcomps.url!
     }
     
