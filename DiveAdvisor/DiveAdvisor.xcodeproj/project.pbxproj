@@ -15,6 +15,9 @@
 		4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */; };
 		4304D1E61EF17E5D00D96935 /* DiveAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1E51EF17E5D00D96935 /* DiveAdvisorTests.swift */; };
 		4304D1F11EF17E5D00D96935 /* DiveAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */; };
+		E6F00E781EF279210021A05F /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E761EF279210021A05F /* Detail.storyboard */; };
+		E6F00E7B1EF279460021A05F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E791EF279460021A05F /* Favorites.storyboard */; };
+		E6F00E7E1EF2796C0021A05F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E7C1EF2796C0021A05F /* Map.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		4304D1EC1EF17E5D00D96935 /* DiveAdvisorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiveAdvisorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiveAdvisorUITests.swift; sourceTree = "<group>"; };
 		4304D1F21EF17E5D00D96935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6F00E771EF279210021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Detail.storyboard; sourceTree = "<group>"; };
+		E6F00E7A1EF279460021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Favorites.storyboard; sourceTree = "<group>"; };
+		E6F00E7D1EF2796C0021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,9 @@
 				4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */,
 				4304D1CF1EF17E5C00D96935 /* ViewController.swift */,
 				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
+				E6F00E7C1EF2796C0021A05F /* Map.storyboard */,
+				E6F00E791EF279460021A05F /* Favorites.storyboard */,
+				E6F00E761EF279210021A05F /* Detail.storyboard */,
 				4304D1D71EF17E5C00D96935 /* Assets.xcassets */,
 				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
 				4304D1DC1EF17E5C00D96935 /* Info.plist */,
@@ -238,6 +247,9 @@
 				4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */,
 				4304D1D81EF17E5C00D96935 /* Assets.xcassets in Resources */,
 				4304D1D31EF17E5C00D96935 /* Main.storyboard in Resources */,
+				E6F00E781EF279210021A05F /* Detail.storyboard in Resources */,
+				E6F00E7B1EF279460021A05F /* Favorites.storyboard in Resources */,
+				E6F00E7E1EF2796C0021A05F /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +326,30 @@
 				4304D1DA1EF17E5C00D96935 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E6F00E761EF279210021A05F /* Detail.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E771EF279210021A05F /* Base */,
+			);
+			name = Detail.storyboard;
+			sourceTree = "<group>";
+		};
+		E6F00E791EF279460021A05F /* Favorites.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E7A1EF279460021A05F /* Base */,
+			);
+			name = Favorites.storyboard;
+			sourceTree = "<group>";
+		};
+		E6F00E7C1EF2796C0021A05F /* Map.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E7D1EF2796C0021A05F /* Base */,
+			);
+			name = Map.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
