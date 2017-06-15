@@ -32,7 +32,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="PZF-Lo-9cO"/>
                     <connections>
-                        <segue destination="Q2K-w1-1lN" kind="show" id="8zU-cw-vbG"/>
+                        <segue destination="Q2K-w1-1lN" kind="show" identifier="MapToDetail" id="8zU-cw-vbG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -54,7 +54,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="oX5-63-r5d"/>
                     <connections>
-                        <segue destination="Q2K-w1-1lN" kind="show" id="l5H-Dc-nzy"/>
+                        <segue destination="Q2K-w1-1lN" kind="show" identifier="TableToDetail" id="l5H-Dc-nzy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z60-Tg-Q5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,6 +145,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="l5H-Dc-nzy"/>
+        <segue reference="8zU-cw-vbG"/>
     </inferredMetricsTieBreakers>
 </document>
