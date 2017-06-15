@@ -107,12 +107,8 @@
 			children = (
 				4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */,
 				4304D1CF1EF17E5C00D96935 /* ViewController.swift */,
-				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
-				E6F00E7C1EF2796C0021A05F /* Map.storyboard */,
-				E6F00E791EF279460021A05F /* Favorites.storyboard */,
-				E6F00E761EF279210021A05F /* Detail.storyboard */,
+				E6F00E8E1EF2A0F90021A05F /* Storyboards */,
 				4304D1D71EF17E5C00D96935 /* Assets.xcassets */,
-				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
 				4304D1DC1EF17E5C00D96935 /* Info.plist */,
 				4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */,
 			);
@@ -135,6 +131,18 @@
 				4304D1F21EF17E5D00D96935 /* Info.plist */,
 			);
 			path = DiveAdvisorUITests;
+			sourceTree = "<group>";
+		};
+		E6F00E8E1EF2A0F90021A05F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
+				E6F00E7C1EF2796C0021A05F /* Map.storyboard */,
+				E6F00E791EF279460021A05F /* Favorites.storyboard */,
+				E6F00E761EF279210021A05F /* Detail.storyboard */,
+				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
