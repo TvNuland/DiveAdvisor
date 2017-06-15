@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */; };
-		4304D1D01EF17E5C00D96935 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1CF1EF17E5C00D96935 /* ViewController.swift */; };
 		4304D1D31EF17E5C00D96935 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D11EF17E5C00D96935 /* Main.storyboard */; };
 		4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */; };
 		4304D1D81EF17E5C00D96935 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4304D1D71EF17E5C00D96935 /* Assets.xcassets */; };
@@ -16,7 +15,12 @@
 		4304D1E61EF17E5D00D96935 /* DiveAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1E51EF17E5D00D96935 /* DiveAdvisorTests.swift */; };
 		4304D1F11EF17E5D00D96935 /* DiveAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304D1F01EF17E5D00D96935 /* DiveAdvisorUITests.swift */; };
 		682D0A9B1EF191350001514E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D0A9A1EF191350001514E /* Alamofire.framework */; };
-		6872ED8B1EF189E700A3313F /* DiveAdvisorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6872ED8A1EF189E700A3313F /* DiveAdvisorService.swift */; };
+		6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6872ED8A1EF189E700A3313F /* DAServiceClass.swift */; };
+		68DCE5D21EF2768200FEFE39 /* Json4Swift_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5CE1EF2768200FEFE39 /* Json4Swift_Base.swift */; };
+		68DCE5D31EF2768200FEFE39 /* Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5CF1EF2768200FEFE39 /* Loc.swift */; };
+		68DCE5D41EF2768200FEFE39 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D01EF2768200FEFE39 /* Request.swift */; };
+		68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D11EF2768200FEFE39 /* Sites.swift */; };
+		68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */; };
 		7FBB54CE3750D56A5D005719 /* Pods_DiveAdvisor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF18ED32FEB8038EAD8A78A /* Pods_DiveAdvisor.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +45,6 @@
 		229EE6B3163FED4679AC9664 /* Pods-DiveAdvisor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiveAdvisor.release.xcconfig"; path = "Pods/Target Support Files/Pods-DiveAdvisor/Pods-DiveAdvisor.release.xcconfig"; sourceTree = "<group>"; };
 		4304D1CA1EF17E5C00D96935 /* DiveAdvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiveAdvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4304D1CF1EF17E5C00D96935 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4304D1D21EF17E5C00D96935 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4304D1D51EF17E5C00D96935 /* DiveAdvisor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiveAdvisor.xcdatamodel; sourceTree = "<group>"; };
 		4304D1D71EF17E5C00D96935 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +58,12 @@
 		4304D1F21EF17E5D00D96935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FF18ED32FEB8038EAD8A78A /* Pods_DiveAdvisor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiveAdvisor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		682D0A9A1EF191350001514E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/DiveAdvisor-eckspersiioxbsfvtajkpuhkeadp/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		6872ED8A1EF189E700A3313F /* DiveAdvisorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiveAdvisorService.swift; sourceTree = SOURCE_ROOT; };
+		6872ED8A1EF189E700A3313F /* DAServiceClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAServiceClass.swift; sourceTree = SOURCE_ROOT; };
+		68DCE5CE1EF2768200FEFE39 /* Json4Swift_Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json4Swift_Base.swift; sourceTree = "<group>"; };
+		68DCE5CF1EF2768200FEFE39 /* Loc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loc.swift; sourceTree = "<group>"; };
+		68DCE5D01EF2768200FEFE39 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		68DCE5D11EF2768200FEFE39 /* Sites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sites.swift; sourceTree = "<group>"; };
+		68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAURLCreator.swift; sourceTree = "<group>"; };
 		EFBC8ED12340A39932590185 /* Pods-DiveAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiveAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiveAdvisor/Pods-DiveAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,10 +129,10 @@
 			isa = PBXGroup;
 			children = (
 				4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */,
-				4304D1CF1EF17E5C00D96935 /* ViewController.swift */,
-				6872ED8A1EF189E700A3313F /* DiveAdvisorService.swift */,
+				68DCE5D81EF2844200FEFE39 /* Network */,
 				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
 				4304D1D71EF17E5C00D96935 /* Assets.xcassets */,
+				68DCE5CD1EF2766900FEFE39 /* Data Objects */,
 				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
 				4304D1DC1EF17E5C00D96935 /* Info.plist */,
 				4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */,
@@ -148,6 +156,26 @@
 				4304D1F21EF17E5D00D96935 /* Info.plist */,
 			);
 			path = DiveAdvisorUITests;
+			sourceTree = "<group>";
+		};
+		68DCE5CD1EF2766900FEFE39 /* Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				68DCE5CE1EF2768200FEFE39 /* Json4Swift_Base.swift */,
+				68DCE5CF1EF2768200FEFE39 /* Loc.swift */,
+				68DCE5D01EF2768200FEFE39 /* Request.swift */,
+				68DCE5D11EF2768200FEFE39 /* Sites.swift */,
+			);
+			name = "Data Objects";
+			sourceTree = "<group>";
+		};
+		68DCE5D81EF2844200FEFE39 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6872ED8A1EF189E700A3313F /* DAServiceClass.swift */,
+				68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		6B53CAAE82E4E7757AAEA05C /* Pods */ = {
@@ -345,9 +373,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6872ED8B1EF189E700A3313F /* DiveAdvisorService.swift in Sources */,
+				6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */,
 				4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */,
-				4304D1D01EF17E5C00D96935 /* ViewController.swift in Sources */,
+				68DCE5D31EF2768200FEFE39 /* Loc.swift in Sources */,
+				68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */,
+				68DCE5D41EF2768200FEFE39 /* Request.swift in Sources */,
+				68DCE5D21EF2768200FEFE39 /* Json4Swift_Base.swift in Sources */,
+				68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */,
 				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
