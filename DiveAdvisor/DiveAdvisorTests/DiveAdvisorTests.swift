@@ -11,6 +11,24 @@ import XCTest
 
 class DiveAdvisorTests: XCTestCase {
     
+//    struct DiveDetails {
+//        let id: Int
+//        let image: NSObject?
+//        let normalTemperature: Double
+//        let review: String
+//        let waterTemperature: Double
+//        
+//        init(id: Int, normalTemperature: Double, review: String, waterTemperature: Double) {
+//            self.id = id
+//            self.normalTemperature = normalTemperature
+//            self.review = review
+//            self.waterTemperature = waterTemperature
+//        }
+//        
+//        var details = [DiveDetails]()
+//    }
+    
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -24,6 +42,17 @@ class DiveAdvisorTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        var diveDetails: [DiveDetails] = []
+//        id: Int16
+//        @NSManaged public var image: NSObject?
+//        @NSManaged public var normalTemperature: Double
+//        @NSManaged public var review: String?
+//        @NSManaged public var waterTemperature: Double
+//        
+//        XCTAssertEqual(storeDiveDetails(for details: DiveDetails)), "HelloHelloHelloHelloHello")
+        
+        
     }
     
     func testPerformanceExample() {

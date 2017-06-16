@@ -68,4 +68,22 @@ class CoredataManager {
         }
         return fetchedDetails.first!
     }
+
+    typealias loadFavoritesResponse = ([DiveDetails]) -> Void
+    
+    func loadFavorites(onCompletion: @escaping ([DiveDetails]?) -> Void) {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<DiveDetails> = DiveDetails.fetchRequest()
+        let sortByID = NSSortDescriptor(key: #keyPath(DiveDetails.id), ascending: true)
+        fetchRequest.sortDescriptors = [sortByID]
+        context.perform {
+            do {
+                let favorites = try context.fetch(fetchRequest)
+                onCompletion(favorites)
+            } catch let error as NSError {
+                fatalError ("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
 }
