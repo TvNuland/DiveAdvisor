@@ -125,22 +125,7 @@ extension ViewController : MKMapViewDelegate {
         pinView?.pinTintColor = UIColor.blue
         pinView?.canShowCallout = true
         pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-        
-        /* Code to use when we would like to implement a custom icon to segue to detail
-         let identifier = "pin"
-         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
-         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-         pinView?.pinTintColor = UIColor.blue
-         pinView?.canShowCallout = true
-         let smallSquare = CGSize(width: 30, height: 30)
-         let button = UIButton(frame: CGRect(origin: CGPointZero, size: smallSquare))
-         button.setBackgroundImage(UIImage(named: "car"), forState: .Normal)
-         button.addTarget(self, action: "getDirections", forControlEvents: .TouchUpInside)
-         pinView?.leftCalloutAccessoryView = button
-         return pinView
-         */
-        
-        
+
         return pinView
     }
     
