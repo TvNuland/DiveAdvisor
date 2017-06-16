@@ -23,6 +23,9 @@
 		68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */; };
 		68DCE5DE1EF2E09E00FEFE39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */; };
 		7FBB54CE3750D56A5D005719 /* Pods_DiveAdvisor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF18ED32FEB8038EAD8A78A /* Pods_DiveAdvisor.framework */; };
+		E6F00E781EF279210021A05F /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E761EF279210021A05F /* Detail.storyboard */; };
+		E6F00E7B1EF279460021A05F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E791EF279460021A05F /* Favorites.storyboard */; };
+		E6F00E7E1EF2796C0021A05F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E7C1EF2796C0021A05F /* Map.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		68DCE5D11EF2768200FEFE39 /* Sites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sites.swift; sourceTree = "<group>"; };
 		68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAURLCreator.swift; sourceTree = "<group>"; };
 		68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E6F00E771EF279210021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Detail.storyboard; sourceTree = "<group>"; };
+		E6F00E7A1EF279460021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Favorites.storyboard; sourceTree = "<group>"; };
+		E6F00E7D1EF2796C0021A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		EFBC8ED12340A39932590185 /* Pods-DiveAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiveAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiveAdvisor/Pods-DiveAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,11 +138,10 @@
 			children = (
 				4304D1CD1EF17E5C00D96935 /* AppDelegate.swift */,
 				68DCE5D81EF2844200FEFE39 /* Network */,
-				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
 				68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */,
+				E6F00E8E1EF2A0F90021A05F /* Storyboards */,
 				4304D1D71EF17E5C00D96935 /* Assets.xcassets */,
 				68DCE5CD1EF2766900FEFE39 /* Data Objects */,
-				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
 				4304D1DC1EF17E5C00D96935 /* Info.plist */,
 				4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */,
 			);
@@ -188,6 +193,18 @@
 				229EE6B3163FED4679AC9664 /* Pods-DiveAdvisor.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E6F00E8E1EF2A0F90021A05F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E6F00E7C1EF2796C0021A05F /* Map.storyboard */,
+				4304D1D91EF17E5C00D96935 /* LaunchScreen.storyboard */,
+				4304D1D11EF17E5C00D96935 /* Main.storyboard */,
+				E6F00E791EF279460021A05F /* Favorites.storyboard */,
+				E6F00E761EF279210021A05F /* Detail.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +273,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "ben smith";
 				TargetAttributes = {
 					4304D1C91EF17E5C00D96935 = {
@@ -304,6 +321,9 @@
 				4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */,
 				4304D1D81EF17E5C00D96935 /* Assets.xcassets in Resources */,
 				4304D1D31EF17E5C00D96935 /* Main.storyboard in Resources */,
+				E6F00E781EF279210021A05F /* Detail.storyboard in Resources */,
+				E6F00E7B1EF279460021A05F /* Favorites.storyboard in Resources */,
+				E6F00E7E1EF2796C0021A05F /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +456,30 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		E6F00E761EF279210021A05F /* Detail.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E771EF279210021A05F /* Base */,
+			);
+			name = Detail.storyboard;
+			sourceTree = "<group>";
+		};
+		E6F00E791EF279460021A05F /* Favorites.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E7A1EF279460021A05F /* Base */,
+			);
+			name = Favorites.storyboard;
+			sourceTree = "<group>";
+		};
+		E6F00E7C1EF2796C0021A05F /* Map.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6F00E7D1EF2796C0021A05F /* Base */,
+			);
+			name = Map.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -457,6 +501,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -507,6 +552,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
