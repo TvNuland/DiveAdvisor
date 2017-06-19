@@ -17,5 +17,5 @@ struct cellIDs {
 }
 
 struct segueIDs {
-    
+    static let MapViewToDetailView = "MapToDetail"
 }

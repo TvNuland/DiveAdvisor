@@ -54,13 +54,17 @@ extension LocationSearchTable: UISearchResultsUpdating {
         request.naturalLanguageQuery = searchBarText
         request.region = mapView.region
         let search = MKLocalSearch(request: request)
+        
         search.start(completionHandler: { response, _ in
             guard let response = response else {
                 return
             }
+            //response.mapItems
+            //MKPlacemark
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         })
+        
     }
 }
 
@@ -80,6 +84,7 @@ extension LocationSearchTable {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
         handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
+//    selectedItem.coordinate
         dismiss(animated: true, completion: nil)
     }
 }

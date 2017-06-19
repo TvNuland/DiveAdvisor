@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
+        
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
         
@@ -51,10 +52,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func weatherReceivedNotificationObserver() {
+        performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+
+    }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MapToDetail" {
+        if segue.identifier == segueIDs.MapViewToDetailView {
+            
 //            let currentAnnotation = mapView.selectedAnnotations[0] //as! FestivalMapAnnotation
 //            let destination = segue.destination as? UITableViewController
 //            destination?.theFestival = currentAnnotation.festival
@@ -98,10 +104,10 @@ extension ViewController: HandleMapSearch {
         annotation.title = placemark.name
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
-            annotation.subtitle = "(city) (state)"
+            annotation.subtitle = "\(city), \(state)"
         }
         mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let span = MKCoordinateSpanMake(1.05, 1.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
@@ -109,8 +115,25 @@ extension ViewController: HandleMapSearch {
 
 extension ViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        performSegue(withIdentifier: "MapToDetail", sender: self)
-        // spot to display more detailed information for dive sites
+        let latitude = view.annotation?.coordinate.latitude
+        let long = view.annotation?.coordinate.longitude
+        let radius = 1.0
+        weatherServiceClass.getWeatherByCoords(lat: latitude!, lng: long!, radius: radius)
+        weatherReceivedNotificationObserver()
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let pinToZoom = view.annotation
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        let pinToZoom = view.annotation
+        let span = MKCoordinateSpanMake(1.05, 1.05)
+        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
