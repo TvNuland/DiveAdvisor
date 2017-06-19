@@ -74,6 +74,7 @@ public class Matches {
 		id = dictionary["id"] as? String
 		equipment = dictionary["equipment"] as? String
 		lng = dictionary["lng"] as? String
+        print(self.id)
 	}
 
 		
