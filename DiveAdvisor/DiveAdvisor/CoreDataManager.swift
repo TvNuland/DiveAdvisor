@@ -8,10 +8,26 @@
 
 import CoreData
 
-class CoredataManager {
+struct InterfaceDiveDetails {
+    let id: Int16
+    let image: NSObject?
+    let normalTemperature: Double
+    let review: String
+    let waterTemperature: Double
+    
+    init(id: Int16, image: NSObject?, normalTemperature: Double, review: String, waterTemperature: Double) {
+        self.id = id
+        self.image = image
+        self.normalTemperature = normalTemperature
+        self.review = review
+        self.waterTemperature = waterTemperature
+    }
+}
+
+class CoreDataManager {
     
     private static let coreDataContainerName = "DiveAdvisor"
-    private static let sharedInstance = CoredataManager()
+    static let sharedInstance = CoreDataManager()
     
     private init() {
     }
@@ -34,7 +50,7 @@ class CoredataManager {
         }
     }
     
-    func storeDiveDetails(for details: DiveDetails) throws {
+    func storeDiveDetails(for details: InterfaceDiveDetails) throws {
         let context = persistentContainer.viewContext
         context.performAndWait {
             let detailsManagedObject = DiveDetails(context: context)

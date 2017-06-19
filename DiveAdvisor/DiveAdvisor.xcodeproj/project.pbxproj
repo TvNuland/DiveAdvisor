@@ -78,7 +78,7 @@
 		E6F00E881EF283D10021A05F /* DiveDetails+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DiveDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E6F00E891EF283D10021A05F /* DiveDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DiveDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E6F00E8C1EF2867E0021A05F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-        	EFBC8ED12340A39932590185 /* Pods-DiveAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiveAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiveAdvisor/Pods-DiveAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
+		EFBC8ED12340A39932590185 /* Pods-DiveAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiveAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiveAdvisor/Pods-DiveAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +201,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-         E6F00E831EF282780021A05F /* CoreData */ = {
+		E6F00E831EF282780021A05F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				4304D1D41EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld */,
@@ -403,7 +403,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -415,17 +415,16 @@
 			files = (
 				E6F00E8D1EF2867E0021A05F /* CoreDataManager.swift in Sources */,
 				E6F00E8A1EF283D10021A05F /* DiveDetails+CoreDataClass.swift in Sources */,
-                6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */,
-                4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */,
+				6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */,
+				4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */,
 				68DCE5D31EF2768200FEFE39 /* Loc.swift in Sources */,
 				68DCE5DE1EF2E09E00FEFE39 /* ViewController.swift in Sources */,
 				68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */,
 				68DCE5D41EF2768200FEFE39 /* Request.swift in Sources */,
 				68DCE5D21EF2768200FEFE39 /* Json4Swift_Base.swift in Sources */,
 				68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */,
-                4304D1D01EF17E5C00D96935 /* ViewController.swift in Sources */,
 				E6F00E8B1EF283D10021A05F /* DiveDetails+CoreDataProperties.swift in Sources */,
-                4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
+				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
