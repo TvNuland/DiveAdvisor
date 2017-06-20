@@ -1,19 +1,35 @@
 //
-//  DetailTableViewController.swift
+//  ExtensionDetailTableViewController.swift
 //  DiveAdvisor
 //
-//  Created by Paul Geurts on 15/06/2017.
+//  Created by Paul Geurts on 20/06/2017.
 //  Copyright © 2017 ben smith. All rights reserved.
 //
 
 import UIKit
 
-
-
-class DetailTableViewController: UITableViewController {
-
-    var detailWeatherObject: Hourly?
+enum detailRows: Int {
+    case imageSliderRow = 0
+    case descriptionRow = 1
+    case weatherRow = 2
+    case reviewRow = 3
     
+    func positionAsInteger() -> Int {
+        switch self {
+        case .imageSliderRow:
+            return 0
+        case .descriptionRow:
+            return 1
+        case .weatherRow:
+            return 2
+        case .reviewRow:
+            return 3
+        }
+    }
+}
+
+class ExtensionDetailTableViewController: UITableViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,32 +54,18 @@ class DetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 4
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        if let tempCelsius = self.detailWeatherObject?.tempC {
-            cell.textLabel?.text = "Temperature Celcius: \(tempCelsius)"
-        }
+        // Configure the cell...
+
         return cell
     }
-    
-    /*
-    public var tempC : String?
-    public var tempF : String?
-    public var windspeedMiles : String?
-    public var windspeedKmph : String?
-    public var winddir16Point : String?
-    public var weatherIconUrl : Array<WeatherIconUrl>?
-    public var swellHeight_m : String?
-    public var swellHeight_ft : String?
-    public var waterTemp_C : String?
-    public var waterTemp_F : String?
     */
-    
 
     /*
     // Override to support conditional editing of the table view.

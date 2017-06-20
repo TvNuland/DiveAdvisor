@@ -19,3 +19,10 @@ struct cellIDs {
 struct segueIDs {
     static let MapViewToDetailView = "MapToDetail"
 }
+
+/* Not implemented yet
+struct observerListenerKey {
+    static let weatherReceived = "weatherReceivedNotification"
+    static let results = "Results"
+}
+ */

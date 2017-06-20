@@ -13,18 +13,19 @@ import Foundation
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 public class Hourly {
-	public var time : String?
+	
 	public var tempC : String?
 	public var tempF : String?
 	public var windspeedMiles : String?
 	public var windspeedKmph : String?
 	public var winddir16Point : String?
-    public var weatherIconUrl : Array<WeatherIconUrl>?
     public var swellHeight_m : String?
     public var swellHeight_ft : String?
     public var waterTemp_C : String?
     public var waterTemp_F : String?
     
+    public var weatherIconUrl : Array<WeatherIconUrl>?
+    public var time : String?
     public var winddirDegree : String?
 	public var weatherCode : String?
 	public var weatherDesc : Array<WeatherDesc>?
