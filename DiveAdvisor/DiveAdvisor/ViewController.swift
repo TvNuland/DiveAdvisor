@@ -52,11 +52,6 @@ class ViewController: UIViewController {
         selector: #selector(ViewController.diveSearchByDetailObservers),
         name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
         object: nil)
-
-
-
-
-        DAServiceClass.diveSearchByCoords()
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
