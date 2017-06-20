@@ -13,10 +13,20 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+struct notificationIDs {
+    static let diveSearchByName = "diveSearchByName"
+    static let diveSearchByGeo = "diveSearchByGeo"
+    static let diveSearchByDetail = "diveSearchByDetail"
+    
+}
 
 class ViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
+    var matches: [Matches] = []
+    var sites: [Sites] = []
+    var detail: Site?
+   
+   let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
     var currentWeatheronPin: Hourly?
@@ -24,7 +34,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DAServiceClass.diveSearchByCoords()
+        
+        DAServiceClass.diveSearchByName("Shark's Cove")
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(ViewController.diveSearchByNameObservers),
+        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
+        object: nil)
+        
+        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(ViewController.diveSearchByGeoObservers),
+        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
+        object: nil)
+        
+        DAServiceClass.diveSearchByDetail(17559)
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(ViewController.diveSearchByDetailObservers),
+        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
+        object: nil)
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -52,7 +79,26 @@ class ViewController: UIViewController {
                                                name: NSNotification.Name(rawValue: "weatherReceivedNotification"),
                                                object: nil)
     }
-
+    
+    func diveSearchByNameObservers(notification: NSNotification) {
+        var diveDict = notification.userInfo as! Dictionary<String, [Matches]>
+        matches = diveDict["data"]!
+    }
+    
+    
+    func diveSearchByGeoObservers(notification: NSNotification) {
+        var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
+        sites = diveDict["data"]!
+    }
+    
+    func diveSearchByDetailObservers(notification: NSNotification) {
+        var diveDict = notification.userInfo as! Dictionary<String, AnyObject>
+        let urls = diveDict["urlData"]! as! [Urls]
+        detail = diveDict["siteDetailData"]! as! Site
+        detail?.urls = urls
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
