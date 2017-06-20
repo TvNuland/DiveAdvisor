@@ -12,26 +12,28 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Request {
-	public var type : String?
-	public var query : String?
+public class Astronomy {
+	public var sunrise : String?
+	public var sunset : String?
+	public var moonrise : String?
+	public var moonset : String?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let astronomy_list = Astronomy.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Request Instances.
+    - returns: Array of Astronomy Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Astronomy]
     {
-        var models:[Request] = []
+        var models:[Astronomy] = []
         for item in array
         {
-            models.append(Request(dictionary: item as! NSDictionary)!)
+            models.append(Astronomy(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +42,18 @@ public class Request {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let request = Request(someDictionaryFromJSON)
+    let astronomy = Astronomy(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Request Instance.
+    - returns: Astronomy Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		type = dictionary["type"] as? String
-		query = dictionary["query"] as? String
+		sunrise = dictionary["sunrise"] as? String
+		sunset = dictionary["sunset"] as? String
+		moonrise = dictionary["moonrise"] as? String
+		moonset = dictionary["moonset"] as? String
 	}
 
 		
@@ -62,8 +66,10 @@ public class Request {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.type, forKey: "type")
-		dictionary.setValue(self.query, forKey: "query")
+		dictionary.setValue(self.sunrise, forKey: "sunrise")
+		dictionary.setValue(self.sunset, forKey: "sunset")
+		dictionary.setValue(self.moonrise, forKey: "moonrise")
+		dictionary.setValue(self.moonset, forKey: "moonset")
 
 		return dictionary
 	}

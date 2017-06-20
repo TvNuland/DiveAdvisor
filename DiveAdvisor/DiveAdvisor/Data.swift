@@ -12,29 +12,26 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Json4Swift_Base {
-	public var request : Request?
-	public var sites : Array<Sites>?
-	public var version : Int?
-	public var loc : Loc?
-	public var result : String?
+public class Data {
+	public var request : Array<Request>?
+	public var weather : Array<Weather>?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let json4Swift_Base_list = Json4Swift_Base.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let data_list = Data.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Json4Swift_Base Instances.
+    - returns: Array of Data Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Json4Swift_Base]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Data]
     {
-        var models:[Json4Swift_Base] = []
+        var models:[Data] = []
         for item in array
         {
-            models.append(Json4Swift_Base(dictionary: item as! NSDictionary)!)
+            models.append(Data(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -43,19 +40,16 @@ public class Json4Swift_Base {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let json4Swift_Base = Json4Swift_Base(someDictionaryFromJSON)
+    let data = Data(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Json4Swift_Base Instance.
+    - returns: Data Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		if (dictionary["request"] != nil) { request = Request(dictionary: dictionary["request"] as! NSDictionary) }
-		if (dictionary["sites"] != nil) { sites = Sites.modelsFromDictionaryArray(array: dictionary["sites"] as! NSArray) }
-		version = dictionary["version"] as? Int
-		if (dictionary["loc"] != nil) { loc = Loc(dictionary: dictionary["loc"] as! NSDictionary) }
-		result = dictionary["result"] as? String
+		if (dictionary["request"] != nil) { request = Request.modelsFromDictionaryArray(array: dictionary["request"] as! NSArray) }
+		if (dictionary["weather"] != nil) { weather = Weather.modelsFromDictionaryArray(array: dictionary["weather"] as! NSArray) }
 	}
 
 		
@@ -68,10 +62,6 @@ public class Json4Swift_Base {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.request?.dictionaryRepresentation(), forKey: "request")
-		dictionary.setValue(self.version, forKey: "version")
-		dictionary.setValue(self.loc?.dictionaryRepresentation(), forKey: "loc")
-		dictionary.setValue(self.result, forKey: "result")
 
 		return dictionary
 	}

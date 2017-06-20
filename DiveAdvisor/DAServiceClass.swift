@@ -12,13 +12,13 @@ import Alamofire
 class DAServiceClass {
     static func diveSearchByCoords() {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchByCoordDist(-8.348, 116.0563, 250))
-        print(url!)
+        //print(url!)
         Alamofire.request(url!).responseString { response in
             if let error = response.result.error {
                 print(error)
             }
             if let value = response.result.value {
-                print(value)
+       //         print(value)
             }
         }
     }

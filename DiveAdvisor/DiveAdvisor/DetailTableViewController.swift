@@ -8,8 +8,12 @@
 
 import UIKit
 
+
+
 class DetailTableViewController: UITableViewController {
 
+    var detailWeatherObject: Hourly?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,15 +41,22 @@ class DetailTableViewController: UITableViewController {
         return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        //if let weaxther = self.detailWeatherObject?.winddir16Point {
+          //  cell.textLabel?.text = "\(weaxther)"
+        
+            //print("CHECK: \(weaxther)")
 
+        //}
+        if let someWeather = self.detailWeatherObject?.tempC {
+            cell.textLabel?.text = "Poop out some results: \(someWeather)"
+        }
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

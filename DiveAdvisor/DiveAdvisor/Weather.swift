@@ -12,26 +12,31 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Loc {
-	public var lat : Double?
-	public var lng : Double?
+public class Weather {
+	public var date : String?
+	public var astronomy : Array<Astronomy>?
+	public var maxtempC : Int?
+	public var maxtempF : Int?
+	public var mintempC : Int?
+	public var mintempF : Int?
+	public var hourly : Array<Hourly>?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let loc_list = Loc.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let weather_list = Weather.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Loc Instances.
+    - returns: Array of Weather Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Loc]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Weather]
     {
-        var models:[Loc] = []
+        var models:[Weather] = []
         for item in array
         {
-            models.append(Loc(dictionary: item as! NSDictionary)!)
+            models.append(Weather(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +45,21 @@ public class Loc {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let loc = Loc(someDictionaryFromJSON)
+    let weather = Weather(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Loc Instance.
+    - returns: Weather Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		lat = dictionary["lat"] as? Double
-		lng = dictionary["lng"] as? Double
+		date = dictionary["date"] as? String
+		if (dictionary["astronomy"] != nil) { astronomy = Astronomy.modelsFromDictionaryArray(array: dictionary["astronomy"] as! NSArray) }
+		maxtempC = dictionary["maxtempC"] as? Int
+		maxtempF = dictionary["maxtempF"] as? Int
+		mintempC = dictionary["mintempC"] as? Int
+		mintempF = dictionary["mintempF"] as? Int
+		if (dictionary["hourly"] != nil) { hourly = Hourly.modelsFromDictionaryArray(array: dictionary["hourly"] as! NSArray) }
 	}
 
 		
@@ -62,8 +72,11 @@ public class Loc {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.lat, forKey: "lat")
-		dictionary.setValue(self.lng, forKey: "lng")
+		dictionary.setValue(self.date, forKey: "date")
+		dictionary.setValue(self.maxtempC, forKey: "maxtempC")
+		dictionary.setValue(self.maxtempF, forKey: "maxtempF")
+		dictionary.setValue(self.mintempC, forKey: "mintempC")
+		dictionary.setValue(self.mintempF, forKey: "mintempF")
 
 		return dictionary
 	}

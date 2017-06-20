@@ -13,12 +13,13 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+
 class ViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
-    
+    var currentWeatheronPin: Hourly?
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -45,6 +46,11 @@ class ViewController: UIViewController {
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         navigationItem.titleView = resultSearchController?.searchBar
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.weatherReceivedNotificationObserver),
+                                               name: NSNotification.Name(rawValue: "weatherReceivedNotification"),
+                                               object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +58,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func weatherReceivedNotificationObserver() {
+
+    
+    func weatherReceivedNotificationObserver(notification: NSNotification) {
+        var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
+        currentWeatheronPin = weatherDict["results"]!
         performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
 
     }
@@ -60,10 +70,9 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIDs.MapViewToDetailView {
-            
-//            let currentAnnotation = mapView.selectedAnnotations[0] //as! FestivalMapAnnotation
-//            let destination = segue.destination as? UITableViewController
-//            destination?.theFestival = currentAnnotation.festival
+    
+            let detailView = segue.destination as! DetailTableViewController
+            detailView.detailWeatherObject = currentWeatheronPin
         }
     }
 
@@ -77,7 +86,7 @@ extension ViewController : CLLocationManagerDelegate {
     }
 
     
-    // MAYBE DELETE PART ABOUT THE FIRST ONE, WE WANT ALL SITES I GUESS - PG
+    //Only do this when no search has been initialised yet
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             print(location)
@@ -119,7 +128,7 @@ extension ViewController : MKMapViewDelegate {
         let long = view.annotation?.coordinate.longitude
         let radius = 1.0
         weatherServiceClass.getWeatherByCoords(lat: latitude!, lng: long!, radius: radius)
-        weatherReceivedNotificationObserver()
+//        weatherReceivedNotificationObserver()
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
