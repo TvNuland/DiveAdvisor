@@ -15,23 +15,23 @@ import Foundation
 public class Site {
 	public var newer_version : String?
 	public var currents : String?
-	public var lat : Double?
+	public var lat : String?
 	public var marinelife : String?
 	public var rating : String?
 	public var maxdepth : String?
 	public var mindepth : String?
 	public var created_on : String?
-	public var id : Int?
-	public var lng : Double?
-	public var votes : Int?
+	public var id : String?
+	public var lng : String?
+	public var votes : String?
 	public var hazards : String?
 	public var name : String?
 	public var description : String?
 	public var water : String?
 	public var predive : String?
 	public var equipment : String?
-	public var created_by : Int?
-
+	public var created_by : String?
+    public var urls:[Urls]?
 /**
     Returns an array of models based on given dictionary.
     
@@ -66,22 +66,22 @@ public class Site {
 
 		newer_version = dictionary["newer_version"] as? String
 		currents = dictionary["currents"] as? String
-		lat = dictionary["lat"] as? Double
+		lat = dictionary["lat"] as? String
 		marinelife = dictionary["marinelife"] as? String
 		rating = dictionary["rating"] as? String
 		maxdepth = dictionary["maxdepth"] as? String
 		mindepth = dictionary["mindepth"] as? String
 		created_on = dictionary["created_on"] as? String
-		id = dictionary["id"] as? Int
-		lng = dictionary["lng"] as? Double
-		votes = dictionary["votes"] as? Int
+		id = dictionary["id"] as? String
+		lng = dictionary["lng"] as? String
+		votes = dictionary["votes"] as? String
 		hazards = dictionary["hazards"] as? String
 		name = dictionary["name"] as? String
 		description = dictionary["description"] as? String
 		water = dictionary["water"] as? String
 		predive = dictionary["predive"] as? String
 		equipment = dictionary["equipment"] as? String
-		created_by = dictionary["created_by"] as? Int
+		created_by = dictionary["created_by"] as? String
 	}
 
 		

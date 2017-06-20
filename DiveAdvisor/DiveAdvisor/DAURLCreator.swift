@@ -62,7 +62,7 @@ struct DAUrlCreator {
     private static func searchByID(by term: SearchTerm) -> URLQueryItem? {
         switch term {
         case .bySearchID(let ID):
-            return URLQueryItem(name: "detail", value: String(ID))
+            return URLQueryItem(name: "siteid", value: String(ID))
         default:
             return nil
         }
@@ -81,13 +81,17 @@ struct DAUrlCreator {
             queryItems.append(searchQuery)
         }
         
+        if let searchQuery = DAUrlCreator.searchByID(by: term) {
+            queryItems.append(searchQuery)
+        }
+        
         if let searchByCoordDist = DAUrlCreator.searchByCoordDist(by: term) {
             for item in searchByCoordDist{
                 queryItems.append(item)
             }
         }
         urlcomps.queryItems = queryItems
-        let test = urlcomps.queryItems
+//        let test = urlcomps.queryItems
 //        print(test!)
         return urlcomps.url!
     }
