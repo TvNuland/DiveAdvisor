@@ -235,7 +235,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
+		E6F00E831EF282780021A05F /* CoreData */ = {
+=======
 		CFA411F31EF819D2002AE6DA /* dataWeatherObjects */ = {
+>>>>>>> develop
 			isa = PBXGroup;
 			children = (
 				CF56F1E71EF7E1380076FC5C /* Hourly.swift */,
@@ -474,7 +478,13 @@
 				CF56F1E81EF7E1380076FC5C /* Hourly.swift in Sources */,
 				E6F00E8D1EF2867E0021A05F /* CoreDataManager.swift in Sources */,
 				E6F00E8A1EF283D10021A05F /* DiveDetails+CoreDataClass.swift in Sources */,
+<<<<<<< HEAD
 				6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */,
+=======
+				CFA412011EF81A31002AE6DA /* WeatherIconUrl.swift in Sources */,
+				6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */,
+				68C045BF1EF3DA72002D72CF /* Urls.swift in Sources */,
+>>>>>>> develop
 				4304D1D61EF17E5C00D96935 /* DiveAdvisor.xcdatamodeld in Sources */,
 				68DCE5D31EF2768200FEFE39 /* Loc.swift in Sources */,
                 CFA411FE1EF81A11002AE6DA /* Weather.swift in Sources */,
@@ -484,6 +494,9 @@
 				CFA411FA1EF81A11002AE6DA /* Astronomy.swift in Sources */,
 				68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */,
 				E6F00E8B1EF283D10021A05F /* DiveDetails+CoreDataProperties.swift in Sources */,
+<<<<<<< HEAD
+				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
+=======
 				CF56F1E21EF416580076FC5C /* weatherURLCreator.swift in Sources */,
 				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
 				CFA411FC1EF81A11002AE6DA /* WeatherBaseObject.swift in Sources */,
@@ -497,6 +510,7 @@
 				CF82C8CC1EF2C77E00AD643A /* LocationSearchTable.swift in Sources */,
                 68C045C11EF3DB3C002D72CF /* Matches.swift in Sources */,
 				68C045BE1EF3DA72002D72CF /* Site.swift in Sources */,
+>>>>>>> develop
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

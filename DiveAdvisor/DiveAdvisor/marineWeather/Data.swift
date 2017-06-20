@@ -12,26 +12,26 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Request {
-	public var type : String?
-	public var query : String?
+public class Data {
+	public var request : Array<Request>?
+	public var weather : Array<Weather>?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let data_list = Data.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Request Instances.
+    - returns: Array of Data Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Data]
     {
-        var models:[Request] = []
+        var models:[Data] = []
         for item in array
         {
-            models.append(Request(dictionary: item as! NSDictionary)!)
+            models.append(Data(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +40,16 @@ public class Request {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let request = Request(someDictionaryFromJSON)
+    let data = Data(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Request Instance.
+    - returns: Data Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		type = dictionary["type"] as? String
-		query = dictionary["query"] as? String
+		if (dictionary["request"] != nil) { request = Request.modelsFromDictionaryArray(dictionary["request"] as! NSArray) }
+		if (dictionary["weather"] != nil) { weather = Weather.modelsFromDictionaryArray(dictionary["weather"] as! NSArray) }
 	}
 
 		
@@ -62,8 +62,6 @@ public class Request {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.type, forKey: "type")
-		dictionary.setValue(self.query, forKey: "query")
 
 		return dictionary
 	}

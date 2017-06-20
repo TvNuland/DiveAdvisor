@@ -12,26 +12,25 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Request {
-	public var type : String?
-	public var query : String?
+public class WeatherBaseObject {
+	public var data : Data?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let json4Swift_Base_list = Json4Swift_Base.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Request Instances.
+    - returns: Array of Json4Swift_Base Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [WeatherBaseObject]
     {
-        var models:[Request] = []
+        var models:[WeatherBaseObject] = []
         for item in array
         {
-            models.append(Request(dictionary: item as! NSDictionary)!)
+            models.append(WeatherBaseObject(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +39,15 @@ public class Request {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let request = Request(someDictionaryFromJSON)
+    let json4Swift_Base = Json4Swift_Base(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Request Instance.
+    - returns: Json4Swift_Base Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		type = dictionary["type"] as? String
-		query = dictionary["query"] as? String
+		if (dictionary["data"] != nil) { data = Data(dictionary: dictionary["data"] as! NSDictionary) }
 	}
 
 		
@@ -62,8 +60,7 @@ public class Request {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.type, forKey: "type")
-		dictionary.setValue(self.query, forKey: "query")
+		dictionary.setValue(self.data?.dictionaryRepresentation(), forKey: "data")
 
 		return dictionary
 	}

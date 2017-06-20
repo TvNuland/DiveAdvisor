@@ -12,26 +12,26 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Request {
-	public var type : String?
-	public var query : String?
+public class Urls {
+	public var name : String?
+	public var url : String?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let urls_list = Urls.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Request Instances.
+    - returns: Array of Urls Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Urls]
     {
-        var models:[Request] = []
+        var models:[Urls] = []
         for item in array
         {
-            models.append(Request(dictionary: item as! NSDictionary)!)
+            models.append(Urls(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +40,16 @@ public class Request {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let request = Request(someDictionaryFromJSON)
+    let urls = Urls(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Request Instance.
+    - returns: Urls Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		type = dictionary["type"] as? String
-		query = dictionary["query"] as? String
+		name = dictionary["name"] as? String
+		url = dictionary["url"] as? String
 	}
 
 		
@@ -62,8 +62,8 @@ public class Request {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.type, forKey: "type")
-		dictionary.setValue(self.query, forKey: "query")
+		dictionary.setValue(self.name, forKey: "name")
+		dictionary.setValue(self.url, forKey: "url")
 
 		return dictionary
 	}

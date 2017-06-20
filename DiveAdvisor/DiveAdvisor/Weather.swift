@@ -12,26 +12,31 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Request {
-	public var type : String?
-	public var query : String?
+public class Weather {
+	public var date : String?
+	public var astronomy : Array<Astronomy>?
+	public var maxtempC : Int?
+	public var maxtempF : Int?
+	public var mintempC : Int?
+	public var mintempF : Int?
+	public var hourly : Array<Hourly>?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let weather_list = Weather.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Request Instances.
+    - returns: Array of Weather Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Weather]
     {
-        var models:[Request] = []
+        var models:[Weather] = []
         for item in array
         {
-            models.append(Request(dictionary: item as! NSDictionary)!)
+            models.append(Weather(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +45,21 @@ public class Request {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let request = Request(someDictionaryFromJSON)
+    let weather = Weather(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Request Instance.
+    - returns: Weather Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		type = dictionary["type"] as? String
-		query = dictionary["query"] as? String
+		date = dictionary["date"] as? String
+		if (dictionary["astronomy"] != nil) { astronomy = Astronomy.modelsFromDictionaryArray(array: dictionary["astronomy"] as! NSArray) }
+		maxtempC = dictionary["maxtempC"] as? Int
+		maxtempF = dictionary["maxtempF"] as? Int
+		mintempC = dictionary["mintempC"] as? Int
+		mintempF = dictionary["mintempF"] as? Int
+		if (dictionary["hourly"] != nil) { hourly = Hourly.modelsFromDictionaryArray(array: dictionary["hourly"] as! NSArray) }
 	}
 
 		
@@ -62,8 +72,11 @@ public class Request {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.type, forKey: "type")
-		dictionary.setValue(self.query, forKey: "query")
+		dictionary.setValue(self.date, forKey: "date")
+		dictionary.setValue(self.maxtempC, forKey: "maxtempC")
+		dictionary.setValue(self.maxtempF, forKey: "maxtempF")
+		dictionary.setValue(self.mintempC, forKey: "mintempC")
+		dictionary.setValue(self.mintempF, forKey: "mintempF")
 
 		return dictionary
 	}

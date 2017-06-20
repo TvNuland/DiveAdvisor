@@ -13,7 +13,7 @@ enum SearchTerm {
     //http://api.divesites.com/?mode=search&str=shark
     case bySearchName(String)
     //http://api.divesites.com/?mode=sites&lat=-8.348&lng=116.0563&dist=250
-    case bySearchByCoordDist(Double, Double, Int)
+    case bySearchCoordDist(Double, Double, Int)
     //http://api.divesites.com/?mode=detail&siteid=17559
     case bySearchID(Int)
 }
@@ -28,7 +28,7 @@ struct DAUrlCreator {
         switch term {
         case .bySearchName:
             return URLQueryItem(name: "mode", value: "search")
-        case .bySearchByCoordDist:
+        case .bySearchCoordDist:
             return URLQueryItem(name: "mode", value: "sites")
         case .bySearchID(let searchMode):
             return URLQueryItem(name: "mode", value: "detail")
@@ -48,7 +48,7 @@ struct DAUrlCreator {
 
     private static func searchByCoordDist(by term: SearchTerm) -> [URLQueryItem]? {
         switch term {
-        case .bySearchByCoordDist(let lat, let lng, let dist):
+        case .bySearchCoordDist(let lat, let lng, let dist):
             var gpsQuery: [URLQueryItem] = []
             gpsQuery.append(URLQueryItem(name: "lat", value: String(lat)))
             gpsQuery.append(URLQueryItem(name: "lng", value: String(lng)))
@@ -62,7 +62,7 @@ struct DAUrlCreator {
     private static func searchByID(by term: SearchTerm) -> URLQueryItem? {
         switch term {
         case .bySearchID(let ID):
-            return URLQueryItem(name: "detail", value: String(ID))
+            return URLQueryItem(name: "siteid", value: String(ID))
         default:
             return nil
         }
@@ -81,14 +81,18 @@ struct DAUrlCreator {
             queryItems.append(searchQuery)
         }
         
+        if let searchQuery = DAUrlCreator.searchByID(by: term) {
+            queryItems.append(searchQuery)
+        }
+        
         if let searchByCoordDist = DAUrlCreator.searchByCoordDist(by: term) {
             for item in searchByCoordDist{
                 queryItems.append(item)
             }
         }
         urlcomps.queryItems = queryItems
-        let test = urlcomps.queryItems
-        print(test!)
+//        let test = urlcomps.queryItems
+//        print(test!)
         return urlcomps.url!
     }
     

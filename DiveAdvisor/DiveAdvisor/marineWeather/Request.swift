@@ -12,26 +12,26 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Loc {
-	public var lat : Double?
-	public var lng : Double?
+public class Request {
+	public var type : String?
+	public var query : String?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let loc_list = Loc.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let request_list = Request.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Loc Instances.
+    - returns: Array of Request Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Loc]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [Request]
     {
-        var models:[Loc] = []
+        var models:[Request] = []
         for item in array
         {
-            models.append(Loc(dictionary: item as! NSDictionary)!)
+            models.append(Request(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +40,16 @@ public class Loc {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let loc = Loc(someDictionaryFromJSON)
+    let request = Request(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Loc Instance.
+    - returns: Request Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		lat = dictionary["lat"] as? Double
-		lng = dictionary["lng"] as? Double
+		type = dictionary["type"] as? String
+		query = dictionary["query"] as? String
 	}
 
 		
@@ -62,8 +62,8 @@ public class Loc {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.lat, forKey: "lat")
-		dictionary.setValue(self.lng, forKey: "lng")
+		dictionary.setValue(self.type, forKey: "type")
+		dictionary.setValue(self.query, forKey: "query")
 
 		return dictionary
 	}
