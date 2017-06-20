@@ -12,7 +12,8 @@ enum detailRows: Int {
     case imageSliderRow = 0
     case descriptionRow = 1
     case weatherRow = 2
-    case reviewRow = 3
+    case detailRow = 3
+    case reviewRow = 4
     
     func positionAsInteger() -> Int {
         switch self {
@@ -22,8 +23,10 @@ enum detailRows: Int {
             return 1
         case .weatherRow:
             return 2
-        case .reviewRow:
+        case .detailRow:
             return 3
+        case .reviewRow:
+            return 4
         }
     }
 }
