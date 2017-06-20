@@ -34,6 +34,9 @@ struct weatherURLCreator {
         let outputAsJSONFormat = URLQueryItem(name: "format", value: "json")
         queryItems.append(outputAsJSONFormat)
         
+        let outputPerDay = URLQueryItem(name: "tp", value: "24")
+        queryItems.append(outputPerDay)
+        
         components.queryItems = queryItems
         return components.url!
     }
