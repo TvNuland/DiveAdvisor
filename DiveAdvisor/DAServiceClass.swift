@@ -19,7 +19,7 @@ enum MatchOn: String {
 
 class DAServiceClass {
     
-    static func diveSearchByName(_ name: String)  {
+    static func diveSearchBy(name: String)  {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchName(name))
         alamoFireCall(url: url!, matchOn: .matches) {
             (result, matches, aNSerror) -> Void in
@@ -32,7 +32,7 @@ class DAServiceClass {
         }
     }
     
-    static func diveSearchByGeo(_ lat: Double, _ lng: Double, _ dist: Int)  {
+    static func diveSearchByGeo(lat: Double, lng: Double, dist: Int)  {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchCoordDist(lat, lng, dist))
         alamoFireCall(url: url!, matchOn: .sites) {
             (result, sites, aNSerror) -> Void in
@@ -45,7 +45,7 @@ class DAServiceClass {
         }
     }
     
-    static func diveSearchByDetail(_ id: Int)  {
+    static func diveSearchByDetail(id: Int)  {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchID(id))
         alamoFireCall(url: url!, matchOn: .detail) {
             (result, detail, aNSerror) -> Void in
@@ -88,7 +88,7 @@ class DAServiceClass {
                         iterateArrayOfSites(searchResults: responseArray, onCompletion)
                     case .detail:
                         if let sitesDict = jsonDict["site"] as? NSDictionary {
-                            let siteDetail = Site.init(dictionary: sitesDict)
+                            let siteDetail = SiteDetail.init(dictionary: sitesDict)
                             iterateArrayOfUrls(searchResults: responseArray, siteDetail!, onCompletion)
                         }
                     }
@@ -130,7 +130,7 @@ class DAServiceClass {
         onCompletion(true, ["data": temp as AnyObject], nil)
     }
     
-    private static func iterateArrayOfUrls(searchResults: NSArray, _ detailSite: Site, _ onCompletion:  DAapiName) {
+    private static func iterateArrayOfUrls(searchResults: NSArray, _ detailSite: SiteDetail, _ onCompletion:  DAapiName) {
         var temp: [Urls] = []
         
         for searchResult in searchResults {

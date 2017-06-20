@@ -27,7 +27,7 @@ class weatherServiceClass {
                     if let weatherDayArray = weather?.data?.weather,
                         let todaysHourlyWeather = weatherDayArray[0].hourly,
                         let todaysHourAverageWeather = todaysHourlyWeather[0] as? Hourly{
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "weatherReceivedNotification"),
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: notificationIDs.passWeatherDetails),
                                                         object: self,
                                                         userInfo: ["results" :  todaysHourAverageWeather])
                     }

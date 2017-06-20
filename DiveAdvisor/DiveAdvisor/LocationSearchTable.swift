@@ -10,10 +10,54 @@ import UIKit
 import MapKit
 
 class LocationSearchTable: UITableViewController {
-    var matchingItems: [MKMapItem] = []
-    var mapView: MKMapView? = nil
+    var matchingItems: [MKMapItem] = []{
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    var mapView: MKMapView?
     var handleMapSearchDelegate:HandleMapSearch? = nil
+    var searchText: String?
+    override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(LocationSearchTable.diveSearchByNameObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
+                                               object: nil)
+    }
     
+    func diveSearchByNameObservers(notification: NSNotification) {
+        var diveDict = notification.userInfo as! Dictionary<String, [Matches]>
+        let matches = diveDict["data"]!
+        if matches.count == 0 {
+            doAppleSearch()
+        } else {
+            var temp: [MKMapItem] = []
+            for match in matches {
+                temp.append(match.mapItem!)
+            }
+            matchingItems = temp
+        }
+    }
+    
+    
+    func doAppleSearch() {
+        //do this if search restulst are empty
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchText!
+        //        request.region = (mapView?.region)!
+        let search = MKLocalSearch(request: request)
+        
+        search.start(completionHandler: { response, _ in
+            guard let response = response else {
+                return
+            }
+            //response.mapItems
+            //MKPlacemark
+            self.matchingItems = response.mapItems
+        })
+    }
+ 
+    /* Adding address line for apple maps search --- not needed?
     func parseAddress(selectedItem:MKPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
@@ -43,6 +87,7 @@ class LocationSearchTable: UITableViewController {
         )
         return addressLine
     }
+ */
     
 }
 
@@ -50,21 +95,8 @@ extension LocationSearchTable: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let mapView = mapView,
             let searchBarText = searchController.searchBar.text else { return }
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchBarText
-        request.region = mapView.region
-        let search = MKLocalSearch(request: request)
-        
-        search.start(completionHandler: { response, _ in
-            guard let response = response else {
-                return
-            }
-            //response.mapItems
-            //MKPlacemark
-            self.matchingItems = response.mapItems
-            self.tableView.reloadData()
-        })
-        
+        self.searchText = searchBarText
+        DAServiceClass.diveSearchBy(name: searchBarText)
     }
 }
 
@@ -77,14 +109,16 @@ extension LocationSearchTable {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIDs.searchResultCell)!
         let selectedItem = matchingItems[indexPath.row].placemark
         cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
+        cell.detailTextLabel?.text = ""
+        //cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
         handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
-//    selectedItem.coordinate
+        //    selectedItem.coordinate
         dismiss(animated: true, completion: nil)
     }
 }
