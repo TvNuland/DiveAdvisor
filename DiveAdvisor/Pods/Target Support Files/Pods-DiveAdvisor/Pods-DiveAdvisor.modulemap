@@ -1,0 +1,6 @@
+framework module Pods_DiveAdvisor {
+  umbrella header "Pods-DiveAdvisor-umbrella.h"
+
+  export *
+  module * { export * }
+}
