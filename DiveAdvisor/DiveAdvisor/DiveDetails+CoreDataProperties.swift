@@ -2,7 +2,7 @@
 //  DiveDetails+CoreDataProperties.swift
 //  DiveAdvisor
 //
-//  Created by Ton on 2017-06-15.
+//  Created by Ton on 2017-06-21.
 //  Copyright © 2017 ben smith. All rights reserved.
 //
 
@@ -17,9 +17,12 @@ extension DiveDetails {
     }
 
     @NSManaged public var id: Int16
-    @NSManaged public var image: NSObject?
-    @NSManaged public var normalTemperature: Double
+    @NSManaged public var name: String?
     @NSManaged public var review: String?
-    @NSManaged public var waterTemperature: Double
+    @NSManaged public var ocean: String?
+    @NSManaged public var imageURL: String?
+    @NSManaged public var country: String?
+    @NSManaged public var latitude: Double
+    @NSManaged public var longitude: Double
 
 }

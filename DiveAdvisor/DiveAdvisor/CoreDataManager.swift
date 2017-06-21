@@ -14,6 +14,28 @@ enum LoadDiveDetailsResults {
     case notFound
 }
 
+struct InterfaceDiveDetails {
+    var id: Int16
+    var name: String?
+    var country: String?
+    var ocean: String?
+    var imageURL: String?
+    var review: String?
+    var latitude: Double
+    var longitude: Double
+    
+    init(id: Int16, name: String, country: String, ocean: String, imageURL: String, review: String, latitude: Double, longitude: Double) {
+        self.id = id
+        self.name = name
+        self.country = country
+        self.ocean = ocean
+        self.imageURL = imageURL
+        self.review = review
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+}
+
 class CoreDataManager {
     
     private static let coreDataContainerName = "DiveAdvisor"
@@ -46,10 +68,13 @@ class CoreDataManager {
         context.performAndWait {
             let detailsManagedObject = DiveDetails(context: context)
             detailsManagedObject.id = details.id
-            detailsManagedObject.image = details.image
+            detailsManagedObject.name = details.name
+            detailsManagedObject.country = details.country
+            detailsManagedObject.ocean = details.ocean
+            detailsManagedObject.imageURL = details.imageURL
             detailsManagedObject.review = details.review
-            detailsManagedObject.normalTemperature = details.normalTemperature
-            detailsManagedObject.waterTemperature = details.waterTemperature
+            detailsManagedObject.latitude = details.latitude
+            detailsManagedObject.longitude = details.longitude
         }
         try saveContext()
     }
@@ -78,11 +103,13 @@ class CoreDataManager {
             do {
                 fetchedDetails = try fetchRequest.execute()
             } catch let error as NSError {
-                fatalError ("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
+                fatalError("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
             }
         }
         if fetchedDetails.isEmpty {
             return .notFound
+        } else if fetchedDetails.count != 1 {
+            fatalError("CoreData fetchRequest not unique for id: \(diveSiteID)")
         } else {
             return .success(fetchedDetails.first!)
         }

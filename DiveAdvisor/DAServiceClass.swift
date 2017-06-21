@@ -105,11 +105,18 @@ class DAServiceClass {
         var temp: [Matches] = []
         for searchResult in searchResults {
             if let searchResult = searchResult as? [String: AnyObject] {
-                //parse and store json response
                 let item = Matches.init(dictionary: searchResult as NSDictionary)
-                temp.append(item!)
                 //check for presence in core data before doing this expensive ooperation!
-                reverseGeoLocationcoords(item!)
+                let diveID = searchResult["id"] as! Int
+                let result = CoreDataManager.sharedInstance.loadDiveDetails(for: diveID)
+                switch result {
+                case .success(let detailCD):
+                    item?.country = detailCD.country
+                    item?.ocean = detailCD.ocean
+                    temp.append(item!)
+                case .notFound:
+                    reverseGeoLocationcoords(item!)
+                }
             } else {
                 let error = NSError.init(domain: "Parse Error Matches", code: -101)
                 onCompletion(false, nil, error)
@@ -149,14 +156,16 @@ class DAServiceClass {
         onCompletion(true, ["urlData" : temp as AnyObject , "siteDetailData" : detailSite], nil)
     }
     
-    private static func reverseGeoLocationcoords(_ diveSite: Matches){
+    //  MARK: MapKit Geo Locator
+    private static func reverseGeoLocationcoords(_ diveSite: Matches) {
         if let placemark = diveSite.mapItem?.placemark{
             
             let location = CLLocation(latitude: placemark.coordinate.latitude,
                                       longitude: placemark.coordinate.longitude) //changed!!!
             print(location)
             
-            CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
+                (placemarks, error) -> Void in
                 print(location)
                 
                 if error != nil {
@@ -175,6 +184,8 @@ class DAServiceClass {
                             diveSite.ocean = ocean
                             mapItem.name?.append(", \(ocean)")
                         }
+                        storeDiveDetailsfromGeo(for: diveSite)
+                        
                         OperationQueue.main.addOperation {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "notifyUpdateRow"),
                                                             object: self,
@@ -187,9 +198,30 @@ class DAServiceClass {
                 }
             })
         }
-        
-        
     }
+    
+    //  MARK: Store CoreData entity DiveDetails for a DiveSite including reverse Geocoder information
+    private static func storeDiveDetailsfromGeo(for diveSite: Matches) {
+        do {
+            var detailCD: InterfaceDiveDetails?
+            detailCD?.id = Int16(diveSite.id!)!
+            detailCD?.name = diveSite.name
+            detailCD?.country = diveSite.country
+            detailCD?.ocean = diveSite.ocean
+            //   these attributes do not exist in the DiveSite or in Geocoder, so cannot be stored right now
+            //   detailCD?.imageURL = diveSite.imageURL
+            //   detailCD?.review = diveSite.review
+            if let latitude = diveSite.lat {
+                detailCD?.latitude = Double(latitude)!
+            }
+            if let longitude = diveSite.lng {
+                detailCD?.longitude = Double(longitude)!
+            }
+            try CoreDataManager.sharedInstance.storeDiveDetails(for: detailCD!)
+        } catch {
+            print("storeDiveDetails error for \(diveSite.id!)")
+        }
+    }
+    
 }
-
 

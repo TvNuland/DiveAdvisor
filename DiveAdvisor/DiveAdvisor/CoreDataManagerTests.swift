@@ -9,22 +9,6 @@
 import Foundation
 import CoreData
 
-struct InterfaceDiveDetails {
-    let id: Int16
-    let image: NSObject?
-    let normalTemperature: Double
-    let review: String
-    let waterTemperature: Double
-    
-    init(id: Int16, image: NSObject?, normalTemperature: Double, review: String, waterTemperature: Double) {
-        self.id = id
-        self.image = image
-        self.normalTemperature = normalTemperature
-        self.review = review
-        self.waterTemperature = waterTemperature
-    }
-}
-
 class CoreDataManagerTests {
     
     private static var loadDetails: [InterfaceDiveDetails] = []
@@ -41,11 +25,12 @@ class CoreDataManagerTests {
     }
     
     static func testCoreDataInit() {
-        storeDetails.append(InterfaceDiveDetails.init(id: 18828, image: nil, normalTemperature: 31, review: "review 18828", waterTemperature: 21))
-        storeDetails.append(InterfaceDiveDetails(id: 18883, image: nil, normalTemperature: 32, review: "review 18883", waterTemperature: 22))
-        storeDetails.append(InterfaceDiveDetails(id: 23255, image: nil, normalTemperature: 33, review: "review 23255", waterTemperature: 23))
-        storeDetails.append(InterfaceDiveDetails(id: 12345, image: nil, normalTemperature: 34, review: "review 12345", waterTemperature: 24))
-    }
+//  must add missing attributes
+//        storeDetails.append(InterfaceDiveDetails.init(id: 18828, name: "test 18828", country: "Netherlands", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 18828"))
+//        storeDetails.append(InterfaceDiveDetails.init(id: 12345, name: "test 12345", country: "Belgium", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 12345"))
+//        storeDetails.append(InterfaceDiveDetails.init(id: 19876, name: "test 19876", country: "Germany", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 19876"))
+//        storeDetails.append(InterfaceDiveDetails.init(id: 15000, name: "test 15000", country: "France", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 15000"))
+  }
     
     static func testCoreDataStore() {
         for detail in storeDetails {

@@ -35,21 +35,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //        CoreDataManagerTests.testCoreDataClear()
-        
-        CoreDataManagerTests.testCoreDataInit()
-        CoreDataManagerTests.testCoreDataStore()
-        CoreDataManagerTests.testCoreDataDelete(id: 12345)
-        print("deleted:", "12345")
-        CoreDataManagerTests.testCoreDataLoad()
-        CoreDataManagerTests.testCoreDataDelete(id: 12345)
-        print("deleted:", "12345")
-        CoreDataManagerTests.testCoreDataLoadFavorites()
-        print("---")
-        
-        
-        
         DAServiceClass.diveSearchByName("Shark's Cove")
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ViewController.diveSearchByNameObservers),
