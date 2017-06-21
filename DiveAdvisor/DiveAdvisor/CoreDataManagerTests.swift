@@ -26,10 +26,10 @@ class CoreDataManagerTests {
     
     static func testCoreDataInit() {
 //  must add missing attributes
-//        storeDetails.append(InterfaceDiveDetails.init(id: 18828, name: "test 18828", country: "Netherlands", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 18828"))
-//        storeDetails.append(InterfaceDiveDetails.init(id: 12345, name: "test 12345", country: "Belgium", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 12345"))
-//        storeDetails.append(InterfaceDiveDetails.init(id: 19876, name: "test 19876", country: "Germany", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 19876"))
-//        storeDetails.append(InterfaceDiveDetails.init(id: 15000, name: "test 15000", country: "France", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 15000"))
+        storeDetails.append(InterfaceDiveDetails.init(id: 18828, name: "test 18828", country: "Netherlands", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 18828", latitude: 123.10, longitude: 321.10))
+        storeDetails.append(InterfaceDiveDetails.init(id: 12345, name: "test 12345", country: "Belgium", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 12345", latitude: 456.10, longitude: 654.10))
+        storeDetails.append(InterfaceDiveDetails.init(id: 19876, name: "test 19876", country: "Germany", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 19876", latitude: 789.10, longitude: 987.10))
+        storeDetails.append(InterfaceDiveDetails.init(id: 15000, name: "test 15000", country: "France", ocean: "Noordzee", imageURL: "https://www.someimage.com", review: "review of 15000", latitude: 0.10, longitude: 0.10))
   }
     
     static func testCoreDataStore() {

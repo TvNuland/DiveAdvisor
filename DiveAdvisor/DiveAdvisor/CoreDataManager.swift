@@ -126,7 +126,7 @@ class CoreDataManager {
                 let favorites = try context.fetch(fetchRequest)
                 onCompletion(favorites)
             } catch let error as NSError {
-                fatalError ("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
+                fatalError("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
             }
         }
     }
