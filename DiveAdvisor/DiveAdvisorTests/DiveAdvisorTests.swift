@@ -35,7 +35,7 @@ class DiveAdvisorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testStoreAndLoad() {
+    func testCoreDataStoreAndLoad() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
@@ -46,18 +46,23 @@ class DiveAdvisorTests: XCTestCase {
         //        XCTFail()
         //        waitForExpectationsWithTimeout(10.0, handler:nil)
         
-        var details: [InterfaceDiveDetails] = []
-        details.append(InterfaceDiveDetails.init(id: 18828, image: nil, normalTemperature: 31, review: "review 18828", waterTemperature: 21))
-        details.append(InterfaceDiveDetails(id: 18883, image: nil, normalTemperature: 32, review: "review 18883", waterTemperature: 22))
-        details.append(InterfaceDiveDetails(id: 23255, image: nil, normalTemperature: 33, review: "review 23255", waterTemperature: 23))
+        var loadDetails: [InterfaceDiveDetails] = []
+        var storeDetails: [InterfaceDiveDetails] = []
+
+        storeDetails.append(InterfaceDiveDetails.init(id: 18828, image: nil, normalTemperature: 31, review: "review 18828", waterTemperature: 21))
+        storeDetails.append(InterfaceDiveDetails(id: 18883, image: nil, normalTemperature: 32, review: "review 18883", waterTemperature: 22))
+        storeDetails.append(InterfaceDiveDetails(id: 23255, image: nil, normalTemperature: 33, review: "review 23255", waterTemperature: 23))
         
-        for detail in details {
+        for detail in storeDetails {
             do {
                 try CoreDataManager.sharedInstance.storeDiveDetails(for: detail)
             } catch {
                 XCTFail("storeDiveDetails error")
             }
         }
-    }
+
+        let loadDetail = CoreDataManager.sharedInstance.loadDiveDetails(for: 18828)
+        print(loadDetail)
+   }
     
 }

@@ -6,22 +6,12 @@
 //  Copyright © 2017 Ton van Nuland. All rights reserved.
 //
 
+import Foundation
 import CoreData
 
-struct InterfaceDiveDetails {
-    let id: Int16
-    let image: NSObject?
-    let normalTemperature: Double
-    let review: String
-    let waterTemperature: Double
-    
-    init(id: Int16, image: NSObject?, normalTemperature: Double, review: String, waterTemperature: Double) {
-        self.id = id
-        self.image = image
-        self.normalTemperature = normalTemperature
-        self.review = review
-        self.waterTemperature = waterTemperature
-    }
+enum LoadDiveDetailsResults {
+    case success(DiveDetails)
+    case notFound
 }
 
 class CoreDataManager {
@@ -50,6 +40,7 @@ class CoreDataManager {
         }
     }
     
+    //  MARK: Store CoreData entity DiveDetails
     func storeDiveDetails(for details: InterfaceDiveDetails) throws {
         let context = persistentContainer.viewContext
         context.performAndWait {
@@ -63,13 +54,21 @@ class CoreDataManager {
         try saveContext()
     }
     
-    func deleteDiveDetails(for details: DiveDetails) throws {
+    //  MARK: Delete CoreData entity DiveDetails
+    func deleteDiveDetails(for diveSiteID: Int) throws {
         let context = persistentContainer.viewContext
-        context.delete(details)
-        try saveContext()
+        let result = loadDiveDetails(for: diveSiteID)
+        switch result {
+        case .success(let loadDetail):
+            context.delete(loadDetail)
+            try saveContext()
+        case .notFound:
+            break
+        }
     }
     
-    func loadDiveDetails(for diveSiteID: Int) -> DiveDetails {
+    //  MARK: Load CoreData entity DiveDetails
+    func loadDiveDetails(for diveSiteID: Int) -> LoadDiveDetailsResults {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<DiveDetails> = DiveDetails.fetchRequest()
         let predicate = NSPredicate(format: "\(#keyPath(DiveDetails.id)) == \(diveSiteID)")
@@ -82,12 +81,15 @@ class CoreDataManager {
                 fatalError ("Unresolved error for CoreData fetchRequest \(error), \(error.userInfo)")
             }
         }
-        return fetchedDetails.first!
+        if fetchedDetails.isEmpty {
+            return .notFound
+        } else {
+            return .success(fetchedDetails.first!)
+        }
     }
-
-    typealias loadFavoritesResponse = ([DiveDetails]) -> Void
     
-    func loadFavorites(onCompletion: @escaping ([DiveDetails]?) -> Void) {
+    //  MARK: Load all CoreData entities DiveDetails sorted by id
+    func loadFavoriteDiveDetails(onCompletion: @escaping ([DiveDetails]) -> Void) {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<DiveDetails> = DiveDetails.fetchRequest()
         let sortByID = NSSortDescriptor(key: #keyPath(DiveDetails.id), ascending: true)

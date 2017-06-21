@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import MapKit
 
 typealias DAapiName = (Bool, [String: AnyObject]?, NSError?) -> Void
 
@@ -107,6 +108,8 @@ class DAServiceClass {
                 //parse and store json response
                 let item = Matches.init(dictionary: searchResult as NSDictionary)
                 temp.append(item!)
+                //check for presence in core data before doing this expensive ooperation!
+                reverseGeoLocationcoords(item!)
             } else {
                 let error = NSError.init(domain: "Parse Error Matches", code: -101)
                 onCompletion(false, nil, error)
@@ -146,6 +149,47 @@ class DAServiceClass {
         onCompletion(true, ["urlData" : temp as AnyObject , "siteDetailData" : detailSite], nil)
     }
     
+    private static func reverseGeoLocationcoords(_ diveSite: Matches){
+        if let placemark = diveSite.mapItem?.placemark{
+            
+            let location = CLLocation(latitude: placemark.coordinate.latitude,
+                                      longitude: placemark.coordinate.longitude) //changed!!!
+            print(location)
+            
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+                print(location)
+                
+                if error != nil {
+                    print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                    return
+                }
+                
+                if (placemarks?.count)! > 0 {
+                    let pm = placemarks?[0]
+                    if let mapItem = diveSite.mapItem {
+                        if let country = pm?.country {
+                            diveSite.country = country
+                            mapItem.name?.append(": \(country)")
+                        }
+                        if let ocean = pm?.ocean {
+                            diveSite.ocean = ocean
+                            mapItem.name?.append(", \(ocean)")
+                        }
+                        OperationQueue.main.addOperation {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "notifyUpdateRow"),
+                                                            object: self,
+                                                            userInfo: ["mapitem":diveSite.mapItem])
+                        }
+                    }
+                }
+                else {
+                    print("Problem with the data received from geocoder")
+                }
+            })
+        }
+        
+        
+    }
 }
 
 

@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     var matches: [Matches] = []
     var sites: [Sites] = []
     var detail: Site?
-   
-   let locationManager = CLLocationManager()
+    
+    let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
     var currentWeatheronPin: Hourly?
@@ -35,23 +35,38 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //        CoreDataManagerTests.testCoreDataClear()
+        
+        CoreDataManagerTests.testCoreDataInit()
+        CoreDataManagerTests.testCoreDataStore()
+        CoreDataManagerTests.testCoreDataDelete(id: 12345)
+        print("deleted:", "12345")
+        CoreDataManagerTests.testCoreDataLoad()
+        CoreDataManagerTests.testCoreDataDelete(id: 12345)
+        print("deleted:", "12345")
+        CoreDataManagerTests.testCoreDataLoadFavorites()
+        print("---")
+        
+        
+        
         DAServiceClass.diveSearchByName("Shark's Cove")
         NotificationCenter.default.addObserver(self,
-        selector: #selector(ViewController.diveSearchByNameObservers),
-        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
-        object: nil)
+                                               selector: #selector(ViewController.diveSearchByNameObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
+                                               object: nil)
         
         DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
         NotificationCenter.default.addObserver(self,
-        selector: #selector(ViewController.diveSearchByGeoObservers),
-        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
-        object: nil)
+                                               selector: #selector(ViewController.diveSearchByGeoObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
+                                               object: nil)
         
         DAServiceClass.diveSearchByDetail(17559)
         NotificationCenter.default.addObserver(self,
-        selector: #selector(ViewController.diveSearchByDetailObservers),
-        name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
-        object: nil)
+                                               selector: #selector(ViewController.diveSearchByDetailObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
+                                               object: nil)
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -103,25 +118,25 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     
     func weatherReceivedNotificationObserver(notification: NSNotification) {
         var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
         currentWeatheronPin = weatherDict["results"]!
         performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
-
+        
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIDs.MapViewToDetailView {
-    
+            
             let detailView = segue.destination as! DetailTableViewController
             detailView.detailWeatherObject = currentWeatheronPin
         }
     }
-
+    
 }
 
 extension ViewController : CLLocationManagerDelegate {
@@ -130,7 +145,7 @@ extension ViewController : CLLocationManagerDelegate {
             locationManager.requestLocation()
         }
     }
-
+    
     
     //Only do this when no search has been initialised yet
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -145,7 +160,7 @@ extension ViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: \(error)")
     }
-
+    
 }
 
 extension ViewController: HandleMapSearch {
@@ -174,9 +189,9 @@ extension ViewController : MKMapViewDelegate {
         let long = view.annotation?.coordinate.longitude
         let radius = 1.0
         weatherServiceClass.getWeatherByCoords(lat: latitude!, lng: long!, radius: radius)
-//        weatherReceivedNotificationObserver()
+        //        weatherReceivedNotificationObserver()
     }
-
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let pinToZoom = view.annotation
         let span = MKCoordinateSpanMake(0.05, 0.05)
@@ -203,7 +218,7 @@ extension ViewController : MKMapViewDelegate {
         pinView?.pinTintColor = UIColor.blue
         pinView?.canShowCallout = true
         pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-
+        
         return pinView
     }
     
