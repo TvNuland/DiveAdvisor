@@ -67,8 +67,8 @@ class CoreDataManagerTests {
         CoreDataManager.sharedInstance.loadFavoriteDiveDetails {
             (favorites) -> Void in
             print("loaded", favorites.count, "favorites")
-            for favorite in favorites {
-                print("favorite:", favorite.id, favorite.review!)
+            for fav in favorites {
+                print("favorite:", fav.id, fav.name, fav.country, fav.ocean)
             }
         }
     }

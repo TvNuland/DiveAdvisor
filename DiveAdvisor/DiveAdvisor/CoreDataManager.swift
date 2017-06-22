@@ -108,8 +108,8 @@ class CoreDataManager {
         }
         if fetchedDetails.isEmpty {
             return .notFound
-        } else if fetchedDetails.count != 1 {
-            fatalError("CoreData fetchRequest not unique for id: \(diveSiteID)")
+//        } else if fetchedDetails.count != 1 {
+//            fatalError("CoreData fetchRequest not unique for id: \(diveSiteID)")
         } else {
             return .success(fetchedDetails.first!)
         }

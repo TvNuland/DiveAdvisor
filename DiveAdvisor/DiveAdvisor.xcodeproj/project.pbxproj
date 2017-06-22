@@ -39,7 +39,7 @@
 		CFA411FF1EF81A11002AE6DA /* WeatherDesc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA411F91EF81A11002AE6DA /* WeatherDesc.swift */; };
 		CFA412041EF91F68002AE6DA /* ExtensionDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA412031EF91F68002AE6DA /* ExtensionDetailTableViewController.swift */; };
 		CFA412061EF96531002AE6DA /* DivesiteMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA412051EF96531002AE6DA /* DivesiteMapAnnotation.swift */; };
-        E6A5B7791EF95F1500919DE0 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B7781EF95F1500919DE0 /* CoreDataManagerTests.swift */; };
+		E6A5B7791EF95F1500919DE0 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5B7781EF95F1500919DE0 /* CoreDataManagerTests.swift */; };
 		E6F00E781EF279210021A05F /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E761EF279210021A05F /* Detail.storyboard */; };
 		E6F00E7B1EF279460021A05F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E791EF279460021A05F /* Favorites.storyboard */; };
 		E6F00E7E1EF2796C0021A05F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6F00E7C1EF2796C0021A05F /* Map.storyboard */; };
@@ -366,7 +366,7 @@
 				TargetAttributes = {
 					4304D1C91EF17E5C00D96935 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = GK8G8823P5;
+						DevelopmentTeam = 4XKR43QQQY;
 						ProvisioningStyle = Automatic;
 					};
 					4304D1E01EF17E5D00D96935 = {
@@ -496,7 +496,6 @@
 				CFA411FF1EF81A11002AE6DA /* WeatherDesc.swift in Sources */,
 				68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */,
 				CFA411FA1EF81A11002AE6DA /* Astronomy.swift in Sources */,
-				E613D35A1EF9355F00E390D6 /* Urls.swift in Sources */,
 				E6A5B7791EF95F1500919DE0 /* CoreDataManagerTests.swift in Sources */,
 				68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */,
 				E6F00E8B1EF283D10021A05F /* DiveDetails+CoreDataProperties.swift in Sources */,
@@ -693,10 +692,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GK8G8823P5;
+				DEVELOPMENT_TEAM = 4XKR43QQQY;
 				INFOPLIST_FILE = DiveAdvisor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = PG.DiveAdvisor;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.familieVanNuland.DiveAdvisor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -710,10 +709,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GK8G8823P5;
+				DEVELOPMENT_TEAM = 4XKR43QQQY;
 				INFOPLIST_FILE = DiveAdvisor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = PG.DiveAdvisor;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.familieVanNuland.DiveAdvisor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

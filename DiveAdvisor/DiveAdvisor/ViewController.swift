@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        CoreDataManagerTests.testCoreDataLoadFavorites()
+        
         //        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ViewController.diveSearchByGeoObservers),
@@ -125,8 +127,6 @@ class ViewController: UIViewController {
     }
     
     func diveSearchByGeoObservers(notification: NSNotification) {
-        
-        
         var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
         sites = diveDict["data"]!
         

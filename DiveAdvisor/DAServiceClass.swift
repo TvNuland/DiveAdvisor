@@ -107,8 +107,12 @@ class DAServiceClass {
             if let searchResult = searchResult as? [String: AnyObject] {
                 let item = Matches.init(dictionary: searchResult as NSDictionary)
                 //check for presence in core data before doing this expensive ooperation!
-                let diveID = searchResult["id"] as! Int
-                let result = CoreDataManager.sharedInstance.loadDiveDetails(for: diveID)
+                guard let  diveID = item?.id,
+                    let idforCD = Int(diveID)
+                    else {
+                        fatalError("iterateArrayOfMatches error for divesiteID")
+                }
+                let result = CoreDataManager.sharedInstance.loadDiveDetails(for: idforCD)
                 switch result {
                 case .success(let detailCD):
                     item?.country = detailCD.country
