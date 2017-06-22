@@ -13,51 +13,49 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
-struct notificationIDs {
-    static let diveSearchByName = "diveSearchByName"
-    static let diveSearchByGeo = "diveSearchByGeo"
-    static let diveSearchByDetail = "diveSearchByDetail"
-    
-}
 
 class ViewController: UIViewController {
     
-    var matches: [Matches] = []
     var sites: [Sites] = []
-    var detail: Site?
+    var detail: SiteDetail?
+    let radius = 3.5
     
     let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
     var currentWeatheronPin: Hourly?
+    var currentLocation: CLLocationCoordinate2D?
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var segmentControl: ADVSegmentedControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        DAServiceClass.diveSearchByName("Shark's Cove")
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(ViewController.diveSearchByNameObservers),
-//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
-//                                               object: nil)
-//        
-//        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(ViewController.diveSearchByGeoObservers),
-//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
-//                                               object: nil)
-//        
-//        DAServiceClass.diveSearchByDetail(17559)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(ViewController.diveSearchByDetailObservers),
-//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
-//                                               object: nil)
+        //        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.diveSearchByGeoObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
+                                               object: nil)
         
+        //        DAServiceClass.diveSearchByDetail(17559)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.diveSearchByDetailObservers),
+                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.weatherReceivedNotificationObserver),
+                                               name: NSNotification.Name(rawValue: notificationIDs.passWeatherDetails),
+                                               object: nil)
+        
+        //Setup location manager
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+        //Setup search table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: viewControllerIDs.locationSearchTable) as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
@@ -65,53 +63,134 @@ class ViewController: UIViewController {
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
-        
-        locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
         
+        //Setup search bar
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         navigationItem.titleView = resultSearchController?.searchBar
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.weatherReceivedNotificationObserver),
-                                               name: NSNotification.Name(rawValue: "weatherReceivedNotification"),
-                                               object: nil)
+        //Setup segment controls
+        segmentControl.items = ["50", "150", "300", "600"]
+        segmentControl.font = UIFont(name: "Avenir-Black", size: 12)
+        segmentControl.borderColor = UIColor(white: 1.0, alpha: 0.3)
+        segmentControl.selectedIndex = 0
+        
     }
+
     
-    func diveSearchByNameObservers(notification: NSNotification) {
-        var diveDict = notification.userInfo as! Dictionary<String, [Matches]>
-        matches = diveDict["data"]!
+
+    
+    @IBAction func selectRadiusSegment(_ sender: Any) {
+        
+        if segmentControl.selectedIndex == 0 {
+            print("0")
+            
+            if let coord = currentLocation {
+                //self.mapView.removeAnnotations(self.mapView.annotations)
+                let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
+                DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: Int(radius))
+                addRadiusCircle(location: location, withRadiusInMetres: 5000)
+            }
+            
+        } else if segmentControl.selectedIndex == 1 {
+            print("1")
+            if let coord = currentLocation {
+                //self.mapView.removeAnnotations(self.mapView.annotations)
+                let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
+                DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: Int(radius * 2))
+                addRadiusCircle(location: location, withRadiusInMetres: 10000)
+            }
+            
+        } else if segmentControl.selectedIndex == 2 {
+            print("2")
+            if let coord = currentLocation {
+                //self.mapView.removeAnnotations(self.mapView.annotations)
+                let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
+                DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: Int(radius * 3))
+                addRadiusCircle(location: location, withRadiusInMetres: 15000)
+            }
+        }
+        
+        else {
+            print("3")
+            if let coord = currentLocation {
+                //self.mapView.removeAnnotations(self.mapView.annotations)
+                let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
+                DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: Int(radius * 4))
+                addRadiusCircle(location: location, withRadiusInMetres: 20000)
+            }
+        }
     }
-    
     
     func diveSearchByGeoObservers(notification: NSNotification) {
+        
+        
         var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
         sites = diveDict["data"]!
+        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        
+        for site in sites {
+            
+            let annotation = DivesiteMapAnnotation.init(site: site)
+            mapView.addAnnotation(annotation)
+        }
+        
     }
     
     func diveSearchByDetailObservers(notification: NSNotification) {
         var diveDict = notification.userInfo as! Dictionary<String, AnyObject>
         let urls = diveDict["urlData"]! as! [Urls]
-        detail = diveDict["siteDetailData"]! as! Site
+        detail = diveDict["siteDetailData"]! as! SiteDetail
         detail?.urls = urls
+        print(detail?.urls?[0].url)
+        
+        // parse the website
     }
     
+    func weatherReceivedNotificationObserver(notification: NSNotification) {
+        var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
+        currentWeatheronPin = weatherDict["results"]!
+        
+        //performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+    }
+    
+    //override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    //    if diveSearchByGeoObservers(notification: NSNotification), weatherReceivedNotificationObserver(notification: NSNotification) {
+    //        performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+    //    } else{
+    //
+    //    }
+    //}
+    @IBAction func longPressDropPin(_ recognizer: UIGestureRecognizer) {
+        if recognizer.state == UIGestureRecognizerState.began {
+            dropPinOnLongTap(gestureRecognizer: recognizer)
+            
+        }
+    }
+    
+    func dropPinOnLongTap(gestureRecognizer:UIGestureRecognizer){
+        mapView.removeAnnotations(mapView.annotations)
+        let touchPoint = gestureRecognizer.location(in: mapView)
+        let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        
+        currentLocation = newCoordinates
+        
+        let annotation = MKPointAnnotation()
+        annotation.title = "Dropped Pin"
+        annotation.coordinate = newCoordinates
+        mapView.addAnnotation(annotation)
+        
+        DAServiceClass.diveSearchByGeo(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, dist: Int(radius))
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    func weatherReceivedNotificationObserver(notification: NSNotification) {
-        var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
-        currentWeatheronPin = weatherDict["results"]!
-        performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
-        
-    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -121,8 +200,8 @@ class ViewController: UIViewController {
             detailView.detailWeatherObject = currentWeatheronPin
         }
     }
-    
 }
+
 
 extension ViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -131,14 +210,17 @@ extension ViewController : CLLocationManagerDelegate {
         }
     }
     
-    
-    //Only do this when no search has been initialised yet
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            print(location)
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.setRegion(region, animated: true)
+            
+            //print(location)
+            
+            currentLocation = location.coordinate
+            let regionInMetresFromCoord = MKCoordinateRegionMakeWithDistance(location.coordinate, 5000, 5000)
+            mapView.setRegion(regionInMetresFromCoord, animated: true)
+            
+            DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: Int(radius))
+            
         }
     }
     
@@ -148,12 +230,12 @@ extension ViewController : CLLocationManagerDelegate {
     
 }
 
+
 extension ViewController: HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark){
-        // cache the pin
-        selectedPin = placemark
-        // clear existing pins
-        mapView.removeAnnotations(mapView.annotations)
+        selectedPin = placemark                         // cache the pin
+        mapView.removeAnnotations(mapView.annotations)  // clear existing pins
+        currentLocation = placemark.coordinate
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
@@ -161,19 +243,50 @@ extension ViewController: HandleMapSearch {
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city), \(state)"
         }
+        
         mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpanMake(1.05, 1.05)
+        let span = MKCoordinateSpanMake(0.9, 0.9)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
+        
+        DAServiceClass.diveSearchByGeo(lat: (selectedPin?.coordinate.latitude)!, lng: (selectedPin?.coordinate.longitude)!, dist: Int(radius/100))
+        
+        
     }
 }
 
+
 extension ViewController : MKMapViewDelegate {
+    
+    func addRadiusCircle(location: CLLocation, withRadiusInMetres metres: Double){
+        self.mapView.delegate = self
+        mapView.removeOverlays(mapView.overlays)
+        let circle = MKCircle(center: location.coordinate, radius:metres  as CLLocationDistance)
+        self.mapView.add(circle)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        if overlay is MKCircle {
+            let circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor.red
+            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
+            circle.lineWidth = 1
+            return circle
+        } else {
+            return MKOverlayRenderer()
+        }
+        
+    }
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let latitude = view.annotation?.coordinate.latitude
         let long = view.annotation?.coordinate.longitude
         let radius = 1.0
         weatherServiceClass.getWeatherByCoords(lat: latitude!, lng: long!, radius: radius)
+        if let annotation = view.annotation as? DivesiteMapAnnotation {
+            DAServiceClass.diveSearchByDetail(id: Int(annotation.site.id!)!)
+        }
         //        weatherReceivedNotificationObserver()
     }
     
@@ -200,9 +313,11 @@ extension ViewController : MKMapViewDelegate {
         let identifier = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        pinView?.pinTintColor = UIColor.blue
+        pinView?.pinTintColor = UIColor(red:0.29, green:0.54, blue:0.86, alpha:1.0)
         pinView?.canShowCallout = true
         pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+        pinView?.animatesDrop = true
+        
         
         return pinView
     }

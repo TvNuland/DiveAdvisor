@@ -9,8 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 import Foundation
-import MapKit
-
+import  MapKit
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 public class Matches {
@@ -77,7 +76,6 @@ public class Matches {
 		id = dictionary["id"] as? String
 		equipment = dictionary["equipment"] as? String
 		lng = dictionary["lng"] as? String
-        
         mapItem = makeMapItem(lat: lat, lng: lng)
 
 	}

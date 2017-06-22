@@ -12,7 +12,7 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Site {
+public class SiteDetail {
 	public var newer_version : String?
 	public var currents : String?
 	public var lat : String?
@@ -42,12 +42,12 @@ public class Site {
 
     - returns: Array of Site Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Site]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [SiteDetail]
     {
-        var models:[Site] = []
+        var models:[SiteDetail] = []
         for item in array
         {
-            models.append(Site(dictionary: item as! NSDictionary)!)
+            models.append(SiteDetail(dictionary: item as! NSDictionary)!)
         }
         return models
     }
