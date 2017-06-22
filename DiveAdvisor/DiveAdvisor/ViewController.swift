@@ -35,23 +35,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DAServiceClass.diveSearchByName("Shark's Cove")
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.diveSearchByNameObservers),
-                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
-                                               object: nil)
-        
-        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.diveSearchByGeoObservers),
-                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
-                                               object: nil)
-        
-        DAServiceClass.diveSearchByDetail(17559)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.diveSearchByDetailObservers),
-                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
-                                               object: nil)
+//        DAServiceClass.diveSearchByName("Shark's Cove")
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(ViewController.diveSearchByNameObservers),
+//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByName),
+//                                               object: nil)
+//        
+//        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(ViewController.diveSearchByGeoObservers),
+//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByGeo),
+//                                               object: nil)
+//        
+//        DAServiceClass.diveSearchByDetail(17559)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(ViewController.diveSearchByDetailObservers),
+//                                               name:  NSNotification.Name(rawValue: notificationIDs.diveSearchByDetail),
+//                                               object: nil)
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
