@@ -15,7 +15,6 @@ class LocationSearchTable: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    var mapView: MKMapView?
     var handleMapSearchDelegate:HandleMapSearch? = nil
     var searchText: String?
     override func viewDidLoad() {
@@ -93,8 +92,7 @@ class LocationSearchTable: UITableViewController {
 
 extension LocationSearchTable: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let mapView = mapView,
-            let searchBarText = searchController.searchBar.text else { return }
+        guard let searchBarText = searchController.searchBar.text else { return }
         self.searchText = searchBarText
         DAServiceClass.diveSearchBy(name: searchBarText)
     }

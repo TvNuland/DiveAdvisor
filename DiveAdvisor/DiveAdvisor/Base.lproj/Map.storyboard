@@ -28,28 +28,63 @@
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkS-To-Jmv">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dlc-kH-8n1"/>
+                                    <outletCollection property="gestureRecognizers" destination="EQi-4M-dB7" appends="YES" id="39P-bO-QJH"/>
                                 </connections>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-Gx-Rhw" customClass="ADVSegmentedControl" customModule="DiveAdvisor" customModuleProvider="target">
+                                <rect key="frame" x="67" y="540" width="240" height="48"/>
+                                <color key="backgroundColor" red="0.36470588240000001" green="0.61176470589999998" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="mcO-0i-4I2"/>
+                                    <constraint firstAttribute="width" constant="240" id="oI9-IZ-sFK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedLabelColor">
+                                        <color key="value" red="0.2901960784" green="0.53725490200000003" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.2901960784" green="0.53725490200000003" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLabelColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="thumbColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="selectRadiusSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="l1j-3p-XAb"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nkS-To-Jmv" secondAttribute="trailing" id="9qc-ce-9ji"/>
                             <constraint firstItem="nkS-To-Jmv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C8t-sU-lO8"/>
+                            <constraint firstItem="Adr-Gx-Rhw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yj1-SX-a3r"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nkS-To-Jmv" secondAttribute="bottom" id="aWk-9o-tE8"/>
                             <constraint firstItem="nkS-To-Jmv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xNo-IK-r9K"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Adr-Gx-Rhw" secondAttribute="bottom" constant="30" id="zJb-Dm-0DA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PZF-Lo-9cO"/>
                     <connections>
                         <outlet property="mapView" destination="nkS-To-Jmv" id="824-xk-qMl"/>
+                        <outlet property="segmentControl" destination="Adr-Gx-Rhw" id="UkW-uP-Pb2"/>
                         <segue destination="crX-7X-w5Q" kind="show" identifier="MapToDetail" id="8zU-cw-vbG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="EQi-4M-dB7">
+                    <connections>
+                        <action selector="longPressDropPin:" destination="BYZ-38-t0r" id="udP-WG-k7w"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2551" y="123"/>
+            <point key="canvasLocation" x="2549.5999999999999" y="122.78860569715144"/>
         </scene>
         <!--Location Search Table-->
         <scene sceneID="Lgq-xJ-uKa">
