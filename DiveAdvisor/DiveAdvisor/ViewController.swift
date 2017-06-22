@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     var selectedPin:MKPlacemark? = nil
     var currentWeatheronPin: Hourly?
     var currentLocation: CLLocationCoordinate2D?
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
     
@@ -78,11 +80,16 @@ class ViewController: UIViewController {
         segmentControl.selectedIndex = 0
         
     }
-
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        detail = nil
+        currentWeatheronPin = nil
+    }
+    
     
     @IBAction func selectRadiusSegment(_ sender: Any) {
+        
+        
         
         if segmentControl.selectedIndex == 0 {
             print("0")
@@ -112,7 +119,7 @@ class ViewController: UIViewController {
                 addRadiusCircle(location: location, withRadiusInMetres: 15000)
             }
         }
-        
+            
         else {
             print("3")
             if let coord = currentLocation {
@@ -143,27 +150,35 @@ class ViewController: UIViewController {
     func diveSearchByDetailObservers(notification: NSNotification) {
         var diveDict = notification.userInfo as! Dictionary<String, AnyObject>
         let urls = diveDict["urlData"]! as! [Urls]
+        
         detail = diveDict["siteDetailData"]! as! SiteDetail
         detail?.urls = urls
         print(detail?.urls?[0].url)
-        
+        detail?.weblink = detail?.urls?[0].url
+        if shouldPerformSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self) {
+            performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+        }
         // parse the website
     }
     
     func weatherReceivedNotificationObserver(notification: NSNotification) {
         var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
-        currentWeatheronPin = weatherDict["results"]!
         
-        //performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+        currentWeatheronPin = weatherDict["results"]!
+        if shouldPerformSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self) {
+            performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+        }
     }
     
-    //override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    //    if diveSearchByGeoObservers(notification: NSNotification), weatherReceivedNotificationObserver(notification: NSNotification) {
-    //        performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
-    //    } else{
-    //
-    //    }
-    //}
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if detail == nil || currentWeatheronPin == nil {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
     @IBAction func longPressDropPin(_ recognizer: UIGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.began {
             dropPinOnLongTap(gestureRecognizer: recognizer)
@@ -195,8 +210,14 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIDs.MapViewToDetailView {
             
-            let detailView = segue.destination as! DetailTableViewController
-            detailView.detailWeatherObject = currentWeatheronPin
+            // MARK: Controller
+            //let detailView = segue.destination as! DetailTableViewController
+            let detailView = segue.destination as! WebViewController
+            detailView.siteDetailObject = detail
+            
+            
+            // MARK: Weather
+            //detailView.detailWeatherObject = currentWeatheronPin
         }
     }
 }
@@ -286,7 +307,7 @@ extension ViewController : MKMapViewDelegate {
         if let annotation = view.annotation as? DivesiteMapAnnotation {
             DAServiceClass.diveSearchByDetail(id: Int(annotation.site.id!)!)
         }
-        //        weatherReceivedNotificationObserver()
+        
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -306,6 +327,15 @@ extension ViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
+            //draw the overlay
+            
+            //TO DO:
+            let span = MKCoordinateSpanMake(0.9, 0.9)
+            let region = MKCoordinateRegionMake(annotation.coordinate, span)
+            mapView.setRegion(region, animated: true)
+            
+            //DAServiceClass.diveSearchByGeo(lat: (selectedPin?.coordinate.latitude)!, lng: (selectedPin?.coordinate.longitude)!, dist: Int(radius/100))
+            
             return nil
         }
         
