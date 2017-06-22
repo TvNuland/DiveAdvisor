@@ -215,35 +215,17 @@ class DAServiceClass {
                 else {
                     fatalError("storeDiveDetailsFromGeo error for coordinates")
             }
-            guard let nameCD = diveSite.name,
-                let countryCD = diveSite.country,
-                let oceaneCD = diveSite.ocean
-                else {
-                    fatalError("storeDiveDetailsFromGeo error for name or country or ocean")
-            }
+            let nameCD = diveSite.name ?? ""
+            let countryCD = diveSite.country ?? ""
+            let oceanCD = diveSite.ocean ?? ""
             //   these attributes do not exist in the DiveSite or in Geocoder, so cannot be stored right now
             //   detailCD?.imageURL = diveSite.imageURL
             //   detailCD?.review = diveSite.review
-            var detailCD = InterfaceDiveDetails(id: idCD, name: nameCD, country: countryCD, ocean: oceaneCD, imageURL: nil, review: nil, latitude: latitudeCD, longitude: longitudeCD)
-            try CoreDataManager.sharedInstance.storeDiveDetails(for: detailCD!)
+            let detailCD = InterfaceDiveDetails(id: idCD, name: nameCD, country: countryCD, ocean: oceanCD, imageURL: "", review: "", latitude: latitudeCD, longitude: longitudeCD)
+            try CoreDataManager.sharedInstance.storeDiveDetails(for: detailCD)
         } catch {
             fatalError("storeDiveDetailsFromGeo error for \(diveSite.id!)")
         }
     }
     
 }
-
-//var detailCD: InterfaceDiveDetails?
-//detailCD?.id = Int16(diveSite.id!)!
-//detailCD?.name = diveSite.name
-//detailCD?.country = diveSite.country
-//detailCD?.ocean = diveSite.ocean
-////   these attributes do not exist in the DiveSite or in Geocoder, so cannot be stored right now
-////   detailCD?.imageURL = diveSite.imageURL
-////   detailCD?.review = diveSite.review
-//if let latitude = diveSite.lat {
-//    detailCD?.latitude = Double(latitude)!
-//}
-//if let longitude = diveSite.lng {
-//    detailCD?.longitude = Double(longitude)!
-//}
