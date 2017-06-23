@@ -40,17 +40,21 @@ class DetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80
+        tableView.estimatedRowHeight = 400
         
         let imageCell = UINib(nibName: "DetailmageSliderCell", bundle: nil)
-        
         self.tableView.register(imageCell, forCellReuseIdentifier: "detailImageCellID")
         
+        let descriptionTableViewNib = UINib(nibName: "DescriptionTableViewCell", bundle:  nil)
+        self.tableView.register(descriptionTableViewNib, forCellReuseIdentifier: "descriptionTableViewCell")
+        
+        let weatherCell = UINib(nibName: "WeatherCell", bundle:nil)
+        self.tableView.register(weatherCell, forCellReuseIdentifier: "WeatherCellID")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tableView.reloadData()
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

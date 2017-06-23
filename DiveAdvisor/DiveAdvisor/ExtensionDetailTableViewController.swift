@@ -10,23 +10,22 @@ import UIKit
 
 
 
-extension DetailTableViewController {
+extension DetailTableViewController: UITextViewDelegate{
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell  = tableView.dequeueReusableCell(withIdentifier: "reuseID", for: indexPath)
-        switch indexPath.row {
+
+        switch indexPath.section { //NEED TO HAVE SECTIONS TO HAVE VARYING CELL HEIGHTS
             
         case detailRows.imageSliderRow.rawValue:
             print("image slider")
@@ -42,20 +41,35 @@ extension DetailTableViewController {
             
             
         case detailRows.descriptionRow.rawValue:
-            print("description")
-            return cell
+            let descriptionCell = tableView.dequeueReusableCell(withIdentifier: "descriptionTableViewCell", for: indexPath) as! DescriptionTableViewCell
+            
+            // must delegate back to view controller so it can auto resize
+            descriptionCell.DescriptionTextView.delegate = self
+            
+            //test encode html
+            let text = siteDetailObject?.description
+            let str = text?.replacingOccurrences(of: "<[^]>]+>", with: "", options: .regularExpression, range: nil)
+            
+            descriptionCell.DescriptionTextView.text = str
+            
+            return descriptionCell
         
-        case detailRows.weatherRow.rawValue:
-            print("weather")
-            return cell
-        
-        default:
-            print("default")
+        default: //weather cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCellID", for: indexPath) as! WeatherCell
+            if let detailWeatherObject = detailWeatherObject {
+                cell.setValuesOnWeatherInfo(detailWeatherObject: detailWeatherObject)
+            }
             return cell
         }
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        switch indexPath.section {
+            
+        case detailRows.imageSliderRow.rawValue:
+            return 200
+        default:
+            return UITableViewAutomaticDimension
+        }
     }
 
 }

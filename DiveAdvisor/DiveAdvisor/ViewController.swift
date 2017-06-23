@@ -240,7 +240,7 @@ class ViewController: UIViewController {
             let detailView = segue.destination as! DetailTableViewController
             //let detailView = segue.destination as! WebViewController
             detailView.siteDetailObject = detail
-            
+            detailView.detailWeatherObject = currentWeatheronPin
             
             // MARK: Weather
             //detailView.detailWeatherObject = currentWeatheronPin

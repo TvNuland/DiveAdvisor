@@ -22,6 +22,10 @@
 		68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */; };
 		68DCE5DE1EF2E09E00FEFE39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */; };
 		7FBB54CE3750D56A5D005719 /* Pods_DiveAdvisor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF18ED32FEB8038EAD8A78A /* Pods_DiveAdvisor.framework */; };
+		B5BDC02C1EFD72B80092B9C1 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDC02A1EFD72B80092B9C1 /* DescriptionTableViewCell.swift */; };
+		B5BDC02D1EFD72B80092B9C1 /* DescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5BDC02B1EFD72B80092B9C1 /* DescriptionTableViewCell.xib */; };
+		B5BDC0301EFD73910092B9C1 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDC02E1EFD73910092B9C1 /* WeatherCell.swift */; };
+		B5BDC0311EFD73910092B9C1 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5BDC02F1EFD73910092B9C1 /* WeatherCell.xib */; };
 		CF56F1DE1EF3E5410076FC5C /* DiveAdvisor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF56F1DC1EF3E5410076FC5C /* DiveAdvisor.xcdatamodeld */; };
 		CF56F1E01EF416250076FC5C /* weatherServiceClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF56F1DF1EF416250076FC5C /* weatherServiceClass.swift */; };
 		CF56F1E21EF416580076FC5C /* weatherURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF56F1E11EF416580076FC5C /* weatherURLCreator.swift */; };
@@ -112,6 +116,10 @@
 		68DCE5D11EF2768200FEFE39 /* Sites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sites.swift; sourceTree = "<group>"; };
 		68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAURLCreator.swift; sourceTree = "<group>"; };
 		68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5BDC02A1EFD72B80092B9C1 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		B5BDC02B1EFD72B80092B9C1 /* DescriptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		B5BDC02E1EFD73910092B9C1 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		B5BDC02F1EFD73910092B9C1 /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		CF56F1DD1EF3E5410076FC5C /* DiveAdvisor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiveAdvisor.xcdatamodel; sourceTree = "<group>"; };
 		CF56F1DF1EF416250076FC5C /* weatherServiceClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weatherServiceClass.swift; sourceTree = "<group>"; };
 		CF56F1E11EF416580076FC5C /* weatherURLCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weatherURLCreator.swift; sourceTree = "<group>"; };
@@ -292,6 +300,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B5BDC0291EFD72AC0092B9C1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B5BDC02E1EFD73910092B9C1 /* WeatherCell.swift */,
+				B5BDC02F1EFD73910092B9C1 /* WeatherCell.xib */,
+				B5BDC02A1EFD72B80092B9C1 /* DescriptionTableViewCell.swift */,
+				B5BDC02B1EFD72B80092B9C1 /* DescriptionTableViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		CFA411F31EF819D2002AE6DA /* dataWeatherObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +329,7 @@
 		CFA412021EF91F1D002AE6DA /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				B5BDC0291EFD72AC0092B9C1 /* Cells */,
 				CF82C8CF1EF2E3E600AD643A /* DetailTableViewController.swift */,
 				CFA412031EF91F68002AE6DA /* ExtensionDetailTableViewController.swift */,
 				CF7E758F1EFBD9C100CE2C56 /* WebViewController.swift */,
@@ -501,9 +521,11 @@
 				CFABA8771EFD4DE700B22EB6 /* Montserrat-LightItalic.ttf in Resources */,
 				CFABA87E1EFD4DE700B22EB6 /* Montserrat-ThinItalic.ttf in Resources */,
 				CFABA87A1EFD4DE700B22EB6 /* Montserrat-Regular.ttf in Resources */,
+				B5BDC02D1EFD72B80092B9C1 /* DescriptionTableViewCell.xib in Resources */,
 				CFABA8781EFD4DE700B22EB6 /* Montserrat-Medium.ttf in Resources */,
 				CFABA8791EFD4DE700B22EB6 /* Montserrat-MediumItalic.ttf in Resources */,
 				CFABA87B1EFD4DE700B22EB6 /* Montserrat-SemiBold.ttf in Resources */,
+				B5BDC0311EFD73910092B9C1 /* WeatherCell.xib in Resources */,
 				CFABA86D1EFD4DE700B22EB6 /* Montserrat-Black.ttf in Resources */,
 				CFABA8701EFD4DE700B22EB6 /* Montserrat-BoldItalic.ttf in Resources */,
 				4304D1DB1EF17E5C00D96935 /* LaunchScreen.storyboard in Resources */,
@@ -608,12 +630,14 @@
 				E6F00E8B1EF283D10021A05F /* DiveDetails+CoreDataProperties.swift in Sources */,
 				CF56F1E21EF416580076FC5C /* weatherURLCreator.swift in Sources */,
 				4304D1CE1EF17E5C00D96935 /* AppDelegate.swift in Sources */,
+				B5BDC0301EFD73910092B9C1 /* WeatherCell.swift in Sources */,
 				CFA411FC1EF81A11002AE6DA /* WeatherBaseObject.swift in Sources */,
 				CFA411FD1EF81A11002AE6DA /* Request.swift in Sources */,
 				CF56F1E01EF416250076FC5C /* weatherServiceClass.swift in Sources */,
 				CF82C8D01EF2E3E600AD643A /* DetailTableViewController.swift in Sources */,
 				CFA412041EF91F68002AE6DA /* ExtensionDetailTableViewController.swift in Sources */,
 				CFABA8891EFD533700B22EB6 /* DetailImageCollectionExtension.swift in Sources */,
+				B5BDC02C1EFD72B80092B9C1 /* DescriptionTableViewCell.swift in Sources */,
 				CFABA88B1EFD533700B22EB6 /* DetailmageSliderCell.swift in Sources */,
 				CFA411FB1EF81A11002AE6DA /* Data.swift in Sources */,
 				CF56F1DE1EF3E5410076FC5C /* DiveAdvisor.xcdatamodeld in Sources */,
