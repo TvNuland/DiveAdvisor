@@ -8,111 +8,108 @@
 
 import UIKit
 
-enum detailRows: Int {
-    case imageSliderRow = 0
-    case descriptionRow = 1
-    case weatherRow = 2
-    case detailRow = 3
-    case reviewRow = 4
-    
-    func positionAsInteger() -> Int {
-        switch self {
-        case .imageSliderRow:
-            return 0
-        case .descriptionRow:
-            return 1
-        case .weatherRow:
-            return 2
-        case .detailRow:
-            return 3
-        case .reviewRow:
-            return 4
-        }
-    }
-}
 
-class ExtensionDetailTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension DetailTableViewController {
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 4
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        
+        let cell  = tableView.dequeueReusableCell(withIdentifier: "reuseID", for: indexPath)
+        switch indexPath.row {
+            
+        case detailRows.imageSliderRow.rawValue:
+            print("image slider")
+            
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "detailImageCellID", for: indexPath) as! DetailmageSliderCell
+            
+            imageCell.awakeFromNib()
+            imageCell.siteDetail = siteDetailObject
+            imageCell.separatorInset.left = view.frame.width
+            
+            return imageCell
+            
+            
+            
+        case detailRows.descriptionRow.rawValue:
+            print("description")
+            return cell
+        
+        case detailRows.weatherRow.rawValue:
+            print("weather")
+            return cell
+        
+        default:
+            print("default")
+            return cell
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
+
+/*
+ public var tempC : String?
+ public var tempF : String?
+ public var windspeedMiles : String?
+ public var windspeedKmph : String?
+ public var winddir16Point : String?
+ public var weatherIconUrl : Array<WeatherIconUrl>?
+ public var swellHeight_m : String?
+ public var swellHeight_ft : String?
+ public var waterTemp_C : String?
+ public var waterTemp_F : String?
+ */
+
+
+/*
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    //enums for each case (e.g. 0, 1, 2, ...)
+    switch indexPath.row {
+    case detailRows.imageRow.rawValue:
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "imageCellID", for: indexPath) as! ImageCell
+        
+        cell.delegate = self
+        
+        if let urlString = detailMovieObject?.poster {
+            let url = URL(string: urlString)
+            cell.fullImage.kf.setImage(with: url)
+        }
+        
+        if let ratings = self.detailMovieObject?.imdbRating {
+            cell.votes.text = "\(ratings)"
+        }
+        
+        if let urlString = detailMovieObject?.poster {
+            let url = URL(string: urlString)
+            cell.profileMovie.kf.setImage(with: url)
+        }
+        
+        //cell.isUserInteractionEnabled = false
+        cell.imdbIco.image = #imageLiteral(resourceName: "imdb-2-icon")
+        
+        return cell
+        
+        
+    case detailRows.plotRow.rawValue:
+        let cell = tableView.dequeueReusableCell(withIdentifier: "plotCellID", for: indexPath) as! PlotCell
+        cell.moviePlot.text = self.detailMovieObject?.plot
+        
+        return cell
+*/
