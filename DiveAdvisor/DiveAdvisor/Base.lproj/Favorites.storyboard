@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E3u-Rt-Dfb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E3u-Rt-Dfb">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,9 +23,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="oX5-63-r5d"/>
-                    <connections>
-                        <segue destination="crX-7X-w5Q" kind="show" identifier="FavoritesToDetail" id="bKD-mx-XUO"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z60-Tg-Q5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -34,7 +35,6 @@
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="O5z-kg-wKy"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sgs-Yl-qj9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -47,14 +47,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="953-ux-nax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="932" y="993"/>
-        </scene>
-        <!--Detail-->
-        <scene sceneID="OV7-Ki-Ijf">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Detail" id="crX-7X-w5Q" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L0u-DC-lEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2941" y="994"/>
         </scene>
     </scenes>
 </document>

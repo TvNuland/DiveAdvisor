@@ -50,6 +50,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ViewController.diveSearchByGeoObservers),
@@ -236,8 +237,8 @@ class ViewController: UIViewController {
         if segue.identifier == segueIDs.MapViewToDetailView {
             
             // MARK: Controller
-            //let detailView = segue.destination as! DetailTableViewController
-            let detailView = segue.destination as! WebViewController
+            let detailView = segue.destination as! DetailTableViewController
+            //let detailView = segue.destination as! WebViewController
             detailView.siteDetailObject = detail
             
             
