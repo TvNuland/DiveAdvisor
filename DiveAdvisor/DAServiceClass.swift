@@ -23,12 +23,12 @@ class DAServiceClass {
     static func diveSearchBy(name: String)  {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchName(name))
         alamoFireCall(url: url!, matchOn: .matches) {
-            (result, matches, aNSerror) -> Void in
+            (result, sites, aNSerror) -> Void in
             if result == false {
                 print(aNSerror)
             } else {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: notificationIDs.diveSearchByName),
-                                                object: self, userInfo: matches)
+                                                object: self, userInfo: sites)
             }
         }
     }
@@ -59,8 +59,6 @@ class DAServiceClass {
         }
     }
     
-    
-    
     private static func alamoFireCall(url: URL, matchOn: MatchOn, _ onCompletion: @escaping DAapiName) {
         Alamofire.request(url).responseJSON { response in
             if let error = response.result.error {
@@ -84,7 +82,7 @@ class DAServiceClass {
                 if let responseArray = jsonDict[matchOn.rawValue] as? NSArray {
                     switch matchOn {
                     case .matches:
-                        iterateArrayOfMatches(searchResults: responseArray, onCompletion)
+                        iterateArrayOfSites(searchResults: responseArray, onCompletion)
                     case .sites:
                         iterateArrayOfSites(searchResults: responseArray, onCompletion)
                     case .detail:
@@ -101,16 +99,16 @@ class DAServiceClass {
         }
     }
     
-    private static func iterateArrayOfMatches(searchResults: NSArray, _ onCompletion:  DAapiName) {
-        var temp: [Matches] = []
+    private static func iterateArrayOfSites(searchResults: NSArray, _ onCompletion:  DAapiName) {
+        var temp: [Sites] = []
         for searchResult in searchResults {
             if let searchResult = searchResult as? [String: AnyObject] {
-                let item = Matches.init(dictionary: searchResult as NSDictionary)
+                let item = Sites.init(dictionary: searchResult as NSDictionary)
                 //check for presence in core data before doing this expensive ooperation!
                 guard let  diveID = item?.id,
                     let idforCD = Int(diveID)
                     else {
-                        fatalError("iterateArrayOfMatches error for divesiteID")
+                        fatalError("iterateArrayOfSites error for divesiteID")
                 }
                 let result = CoreDataManager.sharedInstance.loadDiveDetails(for: idforCD)
                 switch result {
@@ -121,21 +119,6 @@ class DAServiceClass {
                 case .notFound:
                     reverseGeoLocationcoords(item!)
                 }
-            } else {
-                let error = NSError.init(domain: "Parse Error Matches", code: -101)
-                onCompletion(false, nil, error)
-            }
-        }
-        onCompletion(true, ["data": temp as AnyObject], nil)
-    }
-    
-    private static func iterateArrayOfSites(searchResults: NSArray, _ onCompletion:  DAapiName) {
-        var temp: [Sites] = []
-        for searchResult in searchResults {
-            if let searchResult = searchResult as? [String: AnyObject] {
-                //parse and store json response
-                let item = Sites.init(dictionary: searchResult as NSDictionary)
-                temp.append(item!)
             } else {
                 let error = NSError.init(domain: "Parse Error Sites", code: -101)
                 onCompletion(false, nil, error)
@@ -161,7 +144,7 @@ class DAServiceClass {
     }
     
     //  MARK: MapKit Geo Locator
-    private static func reverseGeoLocationcoords(_ diveSite: Matches) {
+    private static func reverseGeoLocationcoords(_ diveSite: Sites) {
         if let placemark = diveSite.mapItem?.placemark{
             
             let location = CLLocation(latitude: placemark.coordinate.latitude,
@@ -205,7 +188,7 @@ class DAServiceClass {
     }
     
     //  MARK: Store CoreData entity DiveDetails for a DiveSite including reverse Geocoder information
-    private static func storeDiveDetailsfromGeo(for diveSite: Matches) {
+    private static func storeDiveDetailsfromGeo(for diveSite: Sites) {
         do {
             guard let id = diveSite.id,
                 let idCD = Int16(id)

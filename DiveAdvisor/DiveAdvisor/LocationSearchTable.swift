@@ -35,14 +35,14 @@ class LocationSearchTable: UITableViewController {
     }
     
     func diveSearchByNameObservers(notification: NSNotification) {
-        var diveDict = notification.userInfo as! Dictionary<String, [Matches]>
-        let matches = diveDict["data"]!
-        if matches.count == 0 {
+        var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
+        let sites = diveDict["data"]!
+        if sites.count == 0 {
             doAppleSearch()
         } else {
             cellDetails = []
-            for match in matches {
-                cellDetails.append(CellDetail(name: match.name, country: match.country, ocean: match.ocean, placemark: match.mapItem?.placemark))
+            for site in sites {
+                cellDetails.append(CellDetail(name: site.name, country: site.country, ocean: site.ocean, placemark: site.mapItem?.placemark))
             }
         }
     }
@@ -101,11 +101,41 @@ class LocationSearchTable: UITableViewController {
 }
 
 extension LocationSearchTable: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchBarText = searchController.searchBar.text else { return }
-        self.searchText = searchBarText
-        DAServiceClass.diveSearchBy(name: searchBarText)
+
+    public func updateSearchResults(for searchController: UISearchController) {
+        if searchController.isActive &&
+            isMoreThanTwoCharacters(searchController) && hasSearchTextChanged(searchController) {
+            cellDetails = [] 
+            self.searchText = searchController.searchBar.text!
+            self.scheduledSearch(searchBar: searchController.searchBar, page: 1)
+        }
     }
+    
+    func isMoreThanTwoCharacters(_ searchController: UISearchController) -> Bool {
+        return (searchController.searchBar.text?.characters.count)! > 2
+    }
+    
+    func hasSearchTextChanged(_ searchController: UISearchController) -> Bool {
+        return searchText != searchController.searchBar.text
+    }
+    
+    func scheduledSearch(searchBar: UISearchBar, page: Int) {
+        let searchDelaySeconds: Int = 1
+        let popTime = DispatchTime.now() + .seconds(searchDelaySeconds)
+        let text = searchBar.text!
+        DispatchQueue.main.asyncAfter(deadline: popTime) {
+            if text == searchBar.text {
+                DAServiceClass.diveSearchBy(name: text)
+            }
+        }
+    }
+    
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let searchBarText = searchController.searchBar.text else { return }
+//        self.searchText = searchBarText
+//        DAServiceClass.diveSearchBy(name: searchBarText)
+//    }
+
 }
 
 extension LocationSearchTable {
@@ -117,7 +147,16 @@ extension LocationSearchTable {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIDs.searchResultCell)!
         let item = cellDetails[indexPath.row]
-        cell.textLabel?.text = item.name! + ", " + item.country! + ", " + item.ocean!
+        var cellText = item.name!
+        if let country = item.country,
+            country != "" {
+            cellText.append(", \(country)")
+        }
+        if let ocean = item.ocean,
+            ocean != "" {
+            cellText.append(", \(ocean)")
+        }
+        cell.textLabel?.text = cellText
         cell.detailTextLabel?.text = ""
         //cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
         

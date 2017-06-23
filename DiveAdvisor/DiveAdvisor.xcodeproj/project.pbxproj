@@ -16,7 +16,6 @@
 		6872ED8B1EF189E700A3313F /* DAServiceClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6872ED8A1EF189E700A3313F /* DAServiceClass.swift */; };
 		68C045BE1EF3DA72002D72CF /* SiteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C045BC1EF3DA72002D72CF /* SiteDetail.swift */; };
 		68C045BF1EF3DA72002D72CF /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C045BD1EF3DA72002D72CF /* Urls.swift */; };
-		68C045C11EF3DB3C002D72CF /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C045C01EF3DB3C002D72CF /* Matches.swift */; };
 		68DCE5D51EF2768200FEFE39 /* Sites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D11EF2768200FEFE39 /* Sites.swift */; };
 		68DCE5D71EF27A1700FEFE39 /* DAURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */; };
 		68DCE5DE1EF2E09E00FEFE39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */; };
@@ -84,7 +83,6 @@
 		6872ED8A1EF189E700A3313F /* DAServiceClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAServiceClass.swift; sourceTree = SOURCE_ROOT; };
 		68C045BC1EF3DA72002D72CF /* SiteDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteDetail.swift; sourceTree = "<group>"; };
 		68C045BD1EF3DA72002D72CF /* Urls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
-		68C045C01EF3DB3C002D72CF /* Matches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
 		68DCE5D11EF2768200FEFE39 /* Sites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sites.swift; sourceTree = "<group>"; };
 		68DCE5D61EF27A1700FEFE39 /* DAURLCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAURLCreator.swift; sourceTree = "<group>"; };
 		68DCE5DD1EF2E09E00FEFE39 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 			children = (
 				68DCE5D11EF2768200FEFE39 /* Sites.swift */,
 				68C045BC1EF3DA72002D72CF /* SiteDetail.swift */,
-				68C045C01EF3DB3C002D72CF /* Matches.swift */,
 				68C045BD1EF3DA72002D72CF /* Urls.swift */,
 			);
 			name = "Data Objects";
@@ -511,7 +508,6 @@
 				CF56F1DE1EF3E5410076FC5C /* DiveAdvisor.xcdatamodeld in Sources */,
 				CF82C8CE1EF2CC0500AD643A /* Constants.swift in Sources */,
 				CF82C8CC1EF2C77E00AD643A /* LocationSearchTable.swift in Sources */,
-				68C045C11EF3DB3C002D72CF /* Matches.swift in Sources */,
 				68C045BE1EF3DA72002D72CF /* SiteDetail.swift in Sources */,
 				CF7E758D1EFA9B9400CE2C56 /* ADVSegmentedControl.swift in Sources */,
 			);
