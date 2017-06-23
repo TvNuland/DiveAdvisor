@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 import Foundation
- 
+import  MapKit
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 public class Matches {
@@ -27,7 +27,9 @@ public class Matches {
 	public var id : String?
 	public var equipment : String?
 	public var lng : String?
-
+    public var ocean : String?
+    public var country : String?
+    public var mapItem: MKMapItem?
 /**
     Returns an array of models based on given dictionary.
     
@@ -74,8 +76,22 @@ public class Matches {
 		id = dictionary["id"] as? String
 		equipment = dictionary["equipment"] as? String
 		lng = dictionary["lng"] as? String
+        mapItem = makeMapItem(lat: lat, lng: lng)
+
 	}
 
+    private func makeMapItem(lat: String?, lng: String?) -> MKMapItem? {
+        if let lat = Double(lat!),
+            let lng = Double(lng!) {
+            let sourceLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
+            let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+            sourceMapItem.name = self.name
+            return sourceMapItem
+        } else {
+            return nil
+        }
+    }
 		
 /**
     Returns the dictionary representation for the current instance.

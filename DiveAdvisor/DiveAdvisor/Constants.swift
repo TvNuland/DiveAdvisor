@@ -19,3 +19,10 @@ struct cellIDs {
 struct segueIDs {
     static let MapViewToDetailView = "MapToDetail"
 }
+
+struct notificationIDs {
+    static let diveSearchByName = "diveSearchByName"
+    static let diveSearchByGeo = "diveSearchByGeo"
+    static let diveSearchByDetail = "diveSearchByDetail"
+    static let passWeatherDetails = "weatherReceivedNotification"
+}

@@ -14,49 +14,40 @@ import Foundation
 
 public class Hourly {
 	
-    //Selected Variables:
+	public var tempC : String?
+	public var tempF : String?
+	public var windspeedMiles : String?
+	public var windspeedKmph : String?
+	public var winddir16Point : String?
+    public var swellHeight_m : String?
+    public var swellHeight_ft : String?
+    public var waterTemp_C : String?
+    public var waterTemp_F : String?
     
-    //-- General
-    public var winddir16Point : String?
-    
-    //-- Metric
-    public var tempC : Int?
-	public var windspeedKmph : Int?
-	public var swellHeight_m : Double?
-    public var waterTemp_C : Int?
-    
-    //-- Imperial
-    public var tempF : Int?
-    public var windspeedMiles : Int?
-    public var swellHeight_ft : Double?
-    public var waterTemp_F : Int?
-	
-    //Not Selected
-    public var time : Int?
-    public var winddirDegree : Int?
-    public var weatherCode : Int?
-	public var weatherIconUrl : Array<WeatherIconUrl>?
+//    public var weatherIconUrl : Array<WeatherIconUrl>?
+    public var time : String?
+    public var winddirDegree : String?
+	public var weatherCode : String?
 	public var weatherDesc : Array<WeatherDesc>?
-	public var precipMM : Double?
-	public var humidity : Int?
-	public var visibility : Int?
-	public var pressure : Int?
-	public var cloudcover : Int?
-	public var heatIndexC : Int?
-	public var heatIndexF : Int?
-	public var dewPointC : Int?
-	public var dewPointF : Int?
-	public var windChillC : Int?
-	public var windChillF : Int?
-	public var windGustMiles : Int?
-	public var windGustKmph : Int?
-	public var feelsLikeC : Int?
-	public var feelsLikeF : Int?
-	public var sigHeight_m : Double?
-	
-	public var swellDir : Int?
+	public var precipMM : String?
+	public var humidity : String?
+	public var visibility : String?
+	public var pressure : String?
+	public var cloudcover : String?
+	public var heatIndexC : String?
+	public var heatIndexF : String?
+	public var dewPointC : String?
+	public var dewPointF : String?
+	public var windChillC : String?
+	public var windChillF : String?
+	public var windGustMiles : String?
+	public var windGustKmph : String?
+	public var feelsLikeC : String?
+	public var feelsLikeF : String?
+	public var sigHeight_m : String?
+	public var swellDir : String?
 	public var swellDir16Point : String?
-	public var swellPeriod_secs : Double?
+	public var swellPeriod_secs : String?
 	
 
 /**
@@ -74,7 +65,7 @@ public class Hourly {
         var models:[Hourly] = []
         for item in array
         {
-            models.append(DetailWeather(dictionary: item as! NSDictionary)!)
+            models.append(Hourly(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -91,39 +82,39 @@ public class Hourly {
 */
 	required public init?(dictionary: NSDictionary) {
 
-		time = dictionary["time"] as? Int
-		tempC = dictionary["tempC"] as? Int
-		tempF = dictionary["tempF"] as? Int
-		windspeedMiles = dictionary["windspeedMiles"] as? Int
-		windspeedKmph = dictionary["windspeedKmph"] as? Int
-		winddirDegree = dictionary["winddirDegree"] as? Int
+		time = dictionary["time"] as? String
+		tempC = dictionary["tempC"] as? String
+		tempF = dictionary["tempF"] as? String
+		windspeedMiles = dictionary["windspeedMiles"] as? String
+		windspeedKmph = dictionary["windspeedKmph"] as? String
+		winddirDegree = dictionary["winddirDegree"] as? String
 		winddir16Point = dictionary["winddir16Point"] as? String
-		weatherCode = dictionary["weatherCode"] as? Int
-		if (dictionary["weatherIconUrl"] != nil) { weatherIconUrl = WeatherIconUrl.modelsFromDictionaryArray(dictionary["weatherIconUrl"] as! NSArray) }
-		if (dictionary["weatherDesc"] != nil) { weatherDesc = WeatherDesc.modelsFromDictionaryArray(dictionary["weatherDesc"] as! NSArray) }
-		precipMM = dictionary["precipMM"] as? Double
-		humidity = dictionary["humidity"] as? Int
-		visibility = dictionary["visibility"] as? Int
-		pressure = dictionary["pressure"] as? Int
-		cloudcover = dictionary["cloudcover"] as? Int
-		heatIndexC = dictionary["HeatIndexC"] as? Int
-		heatIndexF = dictionary["HeatIndexF"] as? Int
-		dewPointC = dictionary["DewPointC"] as? Int
-		dewPointF = dictionary["DewPointF"] as? Int
-		windChillC = dictionary["WindChillC"] as? Int
-		windChillF = dictionary["WindChillF"] as? Int
-		windGustMiles = dictionary["WindGustMiles"] as? Int
-		windGustKmph = dictionary["WindGustKmph"] as? Int
-		feelsLikeC = dictionary["FeelsLikeC"] as? Int
-		feelsLikeF = dictionary["FeelsLikeF"] as? Int
-		sigHeight_m = dictionary["sigHeight_m"] as? Double
-		swellHeight_m = dictionary["swellHeight_m"] as? Double
-		swellHeight_ft = dictionary["swellHeight_ft"] as? Double
-		swellDir = dictionary["swellDir"] as? Int
+		weatherCode = dictionary["weatherCode"] as? String
+//		if (dictionary["weatherIconUrl"] != nil) { weatherIconUrl = WeatherIconUrl.modelsFromDictionaryArray(array: dictionary["weatherIconUrl"] as! NSArray) }
+		if (dictionary["weatherDesc"] != nil) { weatherDesc = WeatherDesc.modelsFromDictionaryArray(array: dictionary["weatherDesc"] as! NSArray) }
+		precipMM = dictionary["precipMM"] as? String
+		humidity = dictionary["humidity"] as? String
+		visibility = dictionary["visibility"] as? String
+		pressure = dictionary["pressure"] as? String
+		cloudcover = dictionary["cloudcover"] as? String
+		heatIndexC = dictionary["HeatIndexC"] as? String
+		heatIndexF = dictionary["HeatIndexF"] as? String
+		dewPointC = dictionary["DewPointC"] as? String
+		dewPointF = dictionary["DewPointF"] as? String
+		windChillC = dictionary["WindChillC"] as? String
+		windChillF = dictionary["WindChillF"] as? String
+		windGustMiles = dictionary["WindGustMiles"] as? String
+		windGustKmph = dictionary["WindGustKmph"] as? String
+		feelsLikeC = dictionary["FeelsLikeC"] as? String
+		feelsLikeF = dictionary["FeelsLikeF"] as? String
+		sigHeight_m = dictionary["sigHeight_m"] as? String
+		swellHeight_m = dictionary["swellHeight_m"] as? String
+		swellHeight_ft = dictionary["swellHeight_ft"] as? String
+		swellDir = dictionary["swellDir"] as? String
 		swellDir16Point = dictionary["swellDir16Point"] as? String
-		swellPeriod_secs = dictionary["swellPeriod_secs"] as? Double
-		waterTemp_C = dictionary["waterTemp_C"] as? Int
-		waterTemp_F = dictionary["waterTemp_F"] as? Int
+		swellPeriod_secs = dictionary["swellPeriod_secs"] as? String
+		waterTemp_C = dictionary["waterTemp_C"] as? String
+		waterTemp_F = dictionary["waterTemp_F"] as? String
 	}
 
 		

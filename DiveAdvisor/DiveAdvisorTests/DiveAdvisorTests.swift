@@ -6,8 +6,22 @@
 //  Copyright © 2017 ben smith. All rights reserved.
 //
 
+import CoreData
+
 import XCTest
 @testable import DiveAdvisor
+
+//extension DiveDetails {
+//
+//    convenience init(id: Int16, image: NSObject?, normalTemperature: Double, review: String, waterTemperature: Double) {
+//        self.init()
+//        self.id = id
+//        self.image = image
+//        self.normalTemperature = normalTemperature
+//        self.review = review
+//        self.waterTemperature = waterTemperature
+//    }
+//}
 
 class DiveAdvisorTests: XCTestCase {
     
@@ -21,16 +35,34 @@ class DiveAdvisorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testCoreDataStoreAndLoad() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        
+        //        XCTAssertEqual(storeDiveDetails(for details[0]), "HelloHelloHelloHelloHello")
+        //        XCTAssert((user) != nil)
+        //        XCTAssertTrue(success)
+        //        XCTAssertFalse(bodyUpdate["firstName"] == originalUser.firstName)
+        //        XCTFail()
+        //        waitForExpectationsWithTimeout(10.0, handler:nil)
+        
+        var loadDetails: [InterfaceDiveDetails] = []
+        var storeDetails: [InterfaceDiveDetails] = []
+
+        storeDetails.append(InterfaceDiveDetails.init(id: 18828, image: nil, normalTemperature: 31, review: "review 18828", waterTemperature: 21))
+        storeDetails.append(InterfaceDiveDetails(id: 18883, image: nil, normalTemperature: 32, review: "review 18883", waterTemperature: 22))
+        storeDetails.append(InterfaceDiveDetails(id: 23255, image: nil, normalTemperature: 33, review: "review 23255", waterTemperature: 23))
+        
+        for detail in storeDetails {
+            do {
+                try CoreDataManager.sharedInstance.storeDiveDetails(for: detail)
+            } catch {
+                XCTFail("storeDiveDetails error")
+            }
         }
-    }
+
+        let loadDetail = CoreDataManager.sharedInstance.loadDiveDetails(for: 18828)
+        print(loadDetail)
+   }
     
 }
