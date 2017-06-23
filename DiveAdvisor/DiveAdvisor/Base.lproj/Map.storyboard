@@ -27,7 +27,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkS-To-Jmv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dlc-kH-8n1"/>
@@ -35,7 +35,7 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-Gx-Rhw" customClass="ADVSegmentedControl" customModule="DiveAdvisor" customModuleProvider="target">
-                                <rect key="frame" x="67" y="540" width="240" height="48"/>
+                                <rect key="frame" x="67" y="589" width="240" height="48"/>
                                 <color key="backgroundColor" red="0.36470588240000001" green="0.61176470589999998" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="mcO-0i-4I2"/>
@@ -135,11 +135,12 @@
         <!--Navigation Controller-->
         <scene sceneID="KOc-Yj-wZA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oRF-Wx-giA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i7f-n4-hbg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="Z1U-Bk-Rzl"/>
                     <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V9q-Nn-7dL">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V9q-Nn-7dL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -148,7 +149,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bgp-Db-eNf"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oRF-Wx-giA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1743.5" y="123.5"/>
         </scene>

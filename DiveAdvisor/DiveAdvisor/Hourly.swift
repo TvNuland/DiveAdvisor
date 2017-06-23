@@ -24,7 +24,7 @@ public class Hourly {
     public var waterTemp_C : String?
     public var waterTemp_F : String?
     
-    public var weatherIconUrl : Array<WeatherIconUrl>?
+//    public var weatherIconUrl : Array<WeatherIconUrl>?
     public var time : String?
     public var winddirDegree : String?
 	public var weatherCode : String?
@@ -90,7 +90,7 @@ public class Hourly {
 		winddirDegree = dictionary["winddirDegree"] as? String
 		winddir16Point = dictionary["winddir16Point"] as? String
 		weatherCode = dictionary["weatherCode"] as? String
-		if (dictionary["weatherIconUrl"] != nil) { weatherIconUrl = WeatherIconUrl.modelsFromDictionaryArray(array: dictionary["weatherIconUrl"] as! NSArray) }
+//		if (dictionary["weatherIconUrl"] != nil) { weatherIconUrl = WeatherIconUrl.modelsFromDictionaryArray(array: dictionary["weatherIconUrl"] as! NSArray) }
 		if (dictionary["weatherDesc"] != nil) { weatherDesc = WeatherDesc.modelsFromDictionaryArray(array: dictionary["weatherDesc"] as! NSArray) }
 		precipMM = dictionary["precipMM"] as? String
 		humidity = dictionary["humidity"] as? String

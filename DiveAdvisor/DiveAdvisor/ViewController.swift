@@ -8,9 +8,12 @@
 
 import UIKit
 import MapKit
+import Alamofire
+import Kanna
+import SVProgressHUD
 
 protocol HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark)
+    func dropPinZoomIn(placemark:MKPlacemark, cellDetail: CellDetail)
 }
 
 enum searchRadius: Double{
@@ -20,7 +23,7 @@ enum searchRadius: Double{
     case xl = 100.0
     
     var name: String {
-    get { return String(describing: self)}
+        get { return String(describing: self)}
     }
 }
 
@@ -39,6 +42,8 @@ class ViewController: UIViewController {
     let locationManager = CLLocationManager()
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
+    var droppedPinID:String?
+
     var currentWeatheronPin: Hourly?
     var currentLocation: CLLocationCoordinate2D?
     
@@ -69,10 +74,10 @@ class ViewController: UIViewController {
                                                object: nil)
         
         //Setup location manager
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //        locationManager.delegate = self
+        //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestLocation()
+        //        locationManager.requestLocation()
         mapView.showsUserLocation = true
         
         //Setup search table
@@ -104,6 +109,9 @@ class ViewController: UIViewController {
         currentWeatheronPin = nil
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
+    }
     
     @IBAction func selectRadiusSegment(_ sender: Any) {
         
@@ -130,7 +138,7 @@ class ViewController: UIViewController {
         } else if segmentControl.selectedIndex == 2 {
             if let coord = currentLocation {
                 radiusNauticalMiles = searchRadius.l.rawValue
-
+                
                 //self.mapView.removeAnnotations(self.mapView.annotations)
                 let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
                 DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: radiusNauticalMiles)
@@ -141,7 +149,7 @@ class ViewController: UIViewController {
         else {
             if let coord = currentLocation {
                 radiusNauticalMiles = searchRadius.xl.rawValue
-
+                
                 //self.mapView.removeAnnotations(self.mapView.annotations)
                 let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
                 DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: radiusNauticalMiles)
@@ -151,12 +159,10 @@ class ViewController: UIViewController {
     }
     
     func diveSearchByGeoObservers(notification: NSNotification) {
-        
-        
         var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
         sites = diveDict["data"]!
         
-//        self.mapView.removeAnnotations(self.mapView.annotations)
+        //        self.mapView.removeAnnotations(self.mapView.annotations)
         
         for site in sites {
             
@@ -172,15 +178,64 @@ class ViewController: UIViewController {
         var diveDict = notification.userInfo as! Dictionary<String, AnyObject>
         let urls = diveDict["urlData"]! as! [Urls]
         
-        detail = diveDict["siteDetailData"]! as! SiteDetail
-        detail?.urls = urls
-        print(detail?.urls?[0].url)
-        detail?.weblink = detail?.urls?[0].url
-        if shouldPerformSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self) {
-            performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+        if let detail = diveDict["siteDetailData"]! as? SiteDetail {
+            self.detail = detail
+            self.detail?.urls = urls
+            //        let webUrl = "http://www.divebuddy.com/divesite/27/gili-mimpang-indonesia/"
+            let webUrl = getFirstDetailDiveWebURLString(detail: detail)
+            self.detail?.weblink = webUrl
+            // parse the website
+            print(webUrl)
+            //check which weblink you have...
+            if webUrl.lowercased().range(of:"divebuddy") != nil {
+                alamoFireHTMLParse(weburlString: webUrl)
+            } else {
+                self.performSegue(withIdentifier: segueIDs.MapViewToWebView, sender: self)
+            }
+          
         }
-        // parse the website
     }
+    
+    func getFirstDetailDiveWebURLString(detail: SiteDetail) -> String{
+        if let urlObjects = detail.urls , let urlString = urlObjects[0].url{
+            self.detail?.weblink = urlString
+            return urlString
+        } else { //return default dive site incase there is none in the database!!
+            print("Error there is no detail web link!!")
+            return "http://www.divebuddy.com/divesite/27/gili-mimpang-indonesia/"
+        }
+    }
+    
+    func alamoFireHTMLParse(weburlString: String){
+        Alamofire.request(weburlString).responseString(queue: nil, encoding: .utf8) { response in
+            if let error = response.result.error {
+                print("Alamofire error website \(error)")
+            }
+            if let html = response.result.value {
+                self.parseHTML(html: html)
+                if self.shouldPerformSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self) {
+                    self.performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
+                }
+            }
+        }
+    }
+    
+    func parseHTML(html: String) -> Void {
+        if let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) {
+            for descLine in doc.css("div[id^='divDescription']") {
+                let desc = descLine.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                let str = desc.replacingOccurrences(of: "<[^]>]+>", with: "", options: .regularExpression, range: nil)
+                self.detail?.description = str
+                for imageUrl in doc.css("img[id^='dlPhotosList_imgPhoto']") {
+                    let imageUrlThumbnail = imageUrl["src"]
+                    let imageUrlLarge = imageUrlThumbnail?.replacingOccurrences(of: "sm.jpg", with: ".jpg")
+                    print(imageUrlLarge)
+                    self.detail?.imageUrls.insert(imageUrlLarge!, at: 0)
+                }
+            }
+        }
+    }
+    
     
     func weatherReceivedNotificationObserver(notification: NSNotification) {
         var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
@@ -192,7 +247,7 @@ class ViewController: UIViewController {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if detail == nil || currentWeatheronPin == nil {
+        if self.detail == nil || self.currentWeatheronPin == nil {
             return false
         } else {
             return true
@@ -209,7 +264,7 @@ class ViewController: UIViewController {
     
     func dropPinOnLongTap(gestureRecognizer:UIGestureRecognizer){
         mapView.removeAnnotations(mapView.annotations)
-//        mapView.removeAnnotation(selectedPin!)
+        //        mapView.removeAnnotation(selectedPin!)
         let touchPoint = gestureRecognizer.location(in: mapView)
         let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
@@ -224,13 +279,14 @@ class ViewController: UIViewController {
         
         let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         addRadiusCircle(location: location, withRadiusInMetres: radiusMetres)
-
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -244,6 +300,11 @@ class ViewController: UIViewController {
             
             // MARK: Weather
             //detailView.detailWeatherObject = currentWeatheronPin
+        } else if segue.identifier == segueIDs.MapViewToWebView{
+            // MARK: Controller
+            let detailView = segue.destination as! WebViewController
+            //let detailView = segue.destination as! WebViewController
+            detailView.siteDetailObject = detail
         }
     }
 }
@@ -252,29 +313,47 @@ class ViewController: UIViewController {
 
 
 extension ViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark){
+    func dropPinZoomIn(placemark:MKPlacemark, cellDetail: CellDetail){
+        droppedPinID = cellDetail.id
         selectedPin = placemark                         // cache the pin
         mapView.removeAnnotations(mapView.annotations)  // clear existing pins
         currentLocation = placemark.coordinate
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
+        annotation.subtitle = addSubtitleToDroppedPin(cellDetail: cellDetail)
+        annotation.subtitle = cellDetail.country
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city), \(state)"
         }
         
         mapView.addAnnotation(annotation)
-//        let span = MKCoordinateSpanMake(0.9, 0.9)
-//        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-//        mapView.setRegion(region, animated: true)
+        //        let span = MKCoordinateSpanMake(0.9, 0.9)
+        //        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        //        mapView.setRegion(region, animated: true)
         
         let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         addRadiusCircle(location: location, withRadiusInMetres: radiusMetres)
         
-        DAServiceClass.diveSearchByGeo(lat: (selectedPin?.coordinate.latitude)!, lng: (selectedPin?.coordinate.longitude)!, dist: radiusNauticalMiles)
+        DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude,
+                                       lng: location.coordinate.longitude,
+                                       dist: radiusNauticalMiles)
         
         
+    }
+    
+    func addSubtitleToDroppedPin(cellDetail: CellDetail) -> String{
+        var subtitle = ""
+        if let country = cellDetail.country,
+            country != "" {
+            subtitle.append(", \(country)")
+        }
+        if let ocean = cellDetail.ocean,
+            ocean != "" {
+            subtitle.append(", \(ocean)")
+        }
+        return subtitle
     }
 }
 
@@ -309,24 +388,29 @@ extension ViewController : MKMapViewDelegate {
         let long = view.annotation?.coordinate.longitude
         let radius = 1.0
         weatherServiceClass.getWeatherByCoords(lat: latitude!, lng: long!, radius: radius)
-        if let annotation = view.annotation as? DivesiteMapAnnotation {
-            DAServiceClass.diveSearchByDetail(id: Int(annotation.site.id!)!)
-        }
         
+        if let annotation = mapView.selectedAnnotations[0] as? DivesiteMapAnnotation, let id = annotation.site.id, let intID = Int(id) {
+            SVProgressHUD.show()
+            DAServiceClass.diveSearchByDetail(id: intID)
+        } else if let droppedPinID = droppedPinID, let droppedPinIDInt = Int(droppedPinID){
+            SVProgressHUD.show()
+            DAServiceClass.diveSearchByDetail(id: droppedPinIDInt)
+
+        }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let pinToZoom = view.annotation
-//        let span = MKCoordinateSpanMake(0.05, 0.05)
-//        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
-//        mapView.setRegion(region, animated: true)
+        //        let pinToZoom = view.annotation
+        //        let span = MKCoordinateSpanMake(0.05, 0.05)
+        //        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        //        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-//        let pinToZoom = view.annotation
-//        let span = MKCoordinateSpanMake(1.05, 1.05)
-//        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
-//        mapView.setRegion(region, animated: true)
+        //        let pinToZoom = view.annotation
+        //        let span = MKCoordinateSpanMake(1.05, 1.05)
+        //        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        //        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{

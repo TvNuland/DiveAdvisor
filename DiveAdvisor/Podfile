@@ -6,5 +6,6 @@ target 'DiveAdvisor' do
     pod 'Alamofire', '~> 4.4'
     pod 'Kingfisher', '~> 3.5'
     pod 'SVProgressHUD', '~> 2.1'
+    pod 'Kanna', '~> 2.1.0'
 
 end

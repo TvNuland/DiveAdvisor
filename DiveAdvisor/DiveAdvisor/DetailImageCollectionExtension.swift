@@ -18,7 +18,7 @@ extension  DetailmageSliderCell {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let imageLinks = siteDetail?.imageLinks {
+        if let imageLinks = siteDetail?.imageUrls {
             return (imageLinks.count)
 
         } else {
@@ -30,7 +30,7 @@ extension  DetailmageSliderCell {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCellID",for: indexPath) as! ImageSliderCollectionViewCell
         
-        let media = siteDetail?.imageLinks[indexPath.row]
+        let media = siteDetail?.imageUrls[indexPath.row]
         let url = URL(string: media!)
  
         cell.imageVIew.kf.setImage(with: url)

@@ -94,44 +94,44 @@ class WeatherCell: UITableViewCell {
         var locale = NSLocale.current
         if locale.usesMetricSystem {
             if let tempC = detailWeatherObject.tempC {
-                airTempTitle.text = "Temp C"
-                airTempValue.text = tempC
+//                airTempTitle.text = "Temp C"
+                airTempValue.text = "\(tempC)C"
             }
             
             if let waterTempC = detailWeatherObject.waterTemp_C {
-                waterTempTitle.text = "WaterTemp C"
-                waterTempValue.text = waterTempC
+//                waterTempTitle.text = "WaterTemp C"
+                waterTempValue.text = "\(waterTempC)C"
             }
             
             if let swellHeight_m = detailWeatherObject.swellHeight_m {
-                waveHeightTitle.text = "Wave Height m"
-                waveHeightValue.text = swellHeight_m
+//                waveHeightTitle.text = "Wave Height m"
+                waveHeightValue.text = "\(swellHeight_m)m"
             }
             
             if let windspeedKmph = detailWeatherObject.windspeedKmph {
-                windspeedTitle.text = "Wind Speed Kmph"
-                windspeedValue.text = windspeedKmph
+//                windspeedTitle.text = "Wind Speed Kmph"
+                windspeedValue.text = "\(windspeedKmph)Kmph"
             }
             
         } else {
             
             if let tempF = detailWeatherObject.tempF {
-                airTempTitle.text = "Temp F"
-                airTempValue.text = detailWeatherObject.tempF
+//                airTempTitle.text = "Temp F"
+                airTempValue.text = "\(tempF)f"
             }
             
             if let waterTemp_F = detailWeatherObject.waterTemp_F {
-                waterTempTitle.text = "WaterTemp F"
-                waterTempTitle.text = waterTemp_F
+//                waterTempTitle.text = "WaterTemp F"
+                waterTempValue.text = "\(waterTemp_F)f"
             }
             
             if let swellHeight_ft = detailWeatherObject.swellHeight_ft {
-                waveHeightTitle.text = "Wave Height ft"
-                waveHeightTitle.text = swellHeight_ft
+//                waveHeightTitle.text = "Wave Height ft"
+                waveHeightValue.text = "\(swellHeight_ft)ft"
             }
             if let windspeedMiles = detailWeatherObject.windspeedMiles {
-                windspeedTitle.text = "Wind Speed Mph"
-                windspeedTitle.text = windspeedMiles
+//                windspeedTitle.text = "Wind Speed Mph"
+                windspeedValue.text = "\(windspeedMiles)mph"
             }
         }
         imageForWeather(detailWeatherObject: detailWeatherObject)

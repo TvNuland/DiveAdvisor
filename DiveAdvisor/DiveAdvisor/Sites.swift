@@ -28,9 +28,10 @@ public class Sites {
     public var id : String?
     public var equipment : String?
     public var lng : String?
+    public var ocean : String?
+    public var country : String?
     public var mapItem : MKMapItem?
-    
-    
+
     /**
      Returns an array of models based on given dictionary.
      
@@ -77,7 +78,6 @@ public class Sites {
         id = dictionary["id"] as? String
         equipment = dictionary["equipment"] as? String
         lng = dictionary["lng"] as? String
-        
         mapItem = makeMapItem(lat: lat, lng: lng)
     }
     
@@ -87,8 +87,7 @@ public class Sites {
             let sourceLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
             let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
             let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-            let sourceAnnotation = MKPointAnnotation()
-            sourceAnnotation.title = name
+            sourceMapItem.name = name
             return sourceMapItem
         } else {
             return nil

@@ -56,6 +56,8 @@ extension DetailTableViewController: UITextViewDelegate{
         
         default: //weather cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCellID", for: indexPath) as! WeatherCell
+            cell.awakeFromNib()
+
             if let detailWeatherObject = detailWeatherObject {
                 cell.setValuesOnWeatherInfo(detailWeatherObject: detailWeatherObject)
             }
@@ -66,64 +68,33 @@ extension DetailTableViewController: UITextViewDelegate{
         switch indexPath.section {
             
         case detailRows.imageSliderRow.rawValue:
-            return 200
-        default:
+            if siteDetailObject?.imageUrls == nil {
+                return 0
+            } else {
+                return view.percentage(type: .height, with: 40)
+            }
+        case detailRows.descriptionRow.rawValue:
             return UITableViewAutomaticDimension
+        default:
+            return view.percentage(type: .height, with: 40)
         }
     }
 
 }
 
 
+enum CalculationType {
+    case height
+    case width
+}
 
-/*
- public var tempC : String?
- public var tempF : String?
- public var windspeedMiles : String?
- public var windspeedKmph : String?
- public var winddir16Point : String?
- public var weatherIconUrl : Array<WeatherIconUrl>?
- public var swellHeight_m : String?
- public var swellHeight_ft : String?
- public var waterTemp_C : String?
- public var waterTemp_F : String?
- */
-
-
-/*
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    //enums for each case (e.g. 0, 1, 2, ...)
-    switch indexPath.row {
-    case detailRows.imageRow.rawValue:
+extension UIView {
+    func percentage(type: CalculationType, with percentage: CGFloat) -> CGFloat {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "imageCellID", for: indexPath) as! ImageCell
-        
-        cell.delegate = self
-        
-        if let urlString = detailMovieObject?.poster {
-            let url = URL(string: urlString)
-            cell.fullImage.kf.setImage(with: url)
+        if type == .height {
+            return percentage * self.frame.height/100
+        } else {
+            return percentage * self.frame.width/100
         }
-        
-        if let ratings = self.detailMovieObject?.imdbRating {
-            cell.votes.text = "\(ratings)"
-        }
-        
-        if let urlString = detailMovieObject?.poster {
-            let url = URL(string: urlString)
-            cell.profileMovie.kf.setImage(with: url)
-        }
-        
-        //cell.isUserInteractionEnabled = false
-        cell.imdbIco.image = #imageLiteral(resourceName: "imdb-2-icon")
-        
-        return cell
-        
-        
-    case detailRows.plotRow.rawValue:
-        let cell = tableView.dequeueReusableCell(withIdentifier: "plotCellID", for: indexPath) as! PlotCell
-        cell.moviePlot.text = self.detailMovieObject?.plot
-        
-        return cell
-*/
+    }
+}
