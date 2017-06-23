@@ -32,6 +32,7 @@ public class SiteDetail {
 	public var equipment : String?
 	public var created_by : String?
     public var urls:[Urls]?
+    public var imageUrls:[String]?
     public var weblink: String?
 /**
     Returns an array of models based on given dictionary.

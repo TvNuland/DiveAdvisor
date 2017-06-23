@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import Alamofire
+import Kanna
 
 protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
@@ -20,7 +22,7 @@ enum searchRadius: Double{
     case xl = 100.0
     
     var name: String {
-    get { return String(describing: self)}
+        get { return String(describing: self)}
     }
 }
 
@@ -50,7 +52,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CoreDataManagerTests.testCoreDataLoadFavorites()
+        //        show all that is in CoreData
+        //        CoreDataManagerTests.testCoreDataLoadFavorites()
         
         //        DAServiceClass.diveSearchByGeo(-8.348, 116.0563, 250)
         NotificationCenter.default.addObserver(self,
@@ -70,10 +73,10 @@ class ViewController: UIViewController {
                                                object: nil)
         
         //Setup location manager
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //        locationManager.delegate = self
+        //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestLocation()
+        //        locationManager.requestLocation()
         mapView.showsUserLocation = true
         
         //Setup search table
@@ -131,7 +134,7 @@ class ViewController: UIViewController {
         } else if segmentControl.selectedIndex == 2 {
             if let coord = currentLocation {
                 radiusNauticalMiles = searchRadius.l.rawValue
-
+                
                 //self.mapView.removeAnnotations(self.mapView.annotations)
                 let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
                 DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: radiusNauticalMiles)
@@ -142,7 +145,7 @@ class ViewController: UIViewController {
         else {
             if let coord = currentLocation {
                 radiusNauticalMiles = searchRadius.xl.rawValue
-
+                
                 //self.mapView.removeAnnotations(self.mapView.annotations)
                 let location = CLLocation.init(latitude: coord.latitude, longitude: coord.longitude)
                 DAServiceClass.diveSearchByGeo(lat: location.coordinate.latitude, lng: location.coordinate.longitude, dist: radiusNauticalMiles)
@@ -155,7 +158,7 @@ class ViewController: UIViewController {
         var diveDict = notification.userInfo as! Dictionary<String, [Sites]>
         sites = diveDict["data"]!
         
-//        self.mapView.removeAnnotations(self.mapView.annotations)
+        //        self.mapView.removeAnnotations(self.mapView.annotations)
         
         for site in sites {
             
@@ -173,13 +176,40 @@ class ViewController: UIViewController {
         
         detail = diveDict["siteDetailData"]! as! SiteDetail
         detail?.urls = urls
-        print(detail?.urls?[0].url)
-        detail?.weblink = detail?.urls?[0].url
+        //        let webUrl = "http://www.divebuddy.com/divesite/27/gili-mimpang-indonesia/"
+        let webUrl = detail?.urls?[0].url
+        detail?.weblink = webUrl
         if shouldPerformSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self) {
             performSegue(withIdentifier: segueIDs.MapViewToDetailView, sender: self)
         }
         // parse the website
+        print(webUrl)
+        Alamofire.request(webUrl!).responseString(queue: nil, encoding: .utf8) { response in
+            if let error = response.result.error {
+                print("Alamofire error website \(error)")
+            }
+            if let html = response.result.value {
+                self.parseHTML(html: html)
+            }
+        }
     }
+    
+    func parseHTML(html: String) -> Void {
+        if let doc = Kanna.HTML(html: html, encoding: String.Encoding.utf8) {
+            for descLine in doc.css("div[id^='divDescription']") {
+                let desc = descLine.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                let str = desc.replacingOccurrences(of: "<[^]>]+>", with: "", options: .regularExpression, range: nil)
+                detail?.description = str
+                for imageUrl in doc.css("img[id^='dlPhotosList_imgPhoto']") {
+                    let imageUrlThumbnail = imageUrl["src"]
+                    let imageUrlLarge = imageUrlThumbnail?.replacingOccurrences(of: "sm.jpg", with: ".jpg")
+                    print(imageUrlLarge)
+                    detail?.imageUrls?.append(imageUrlLarge!)
+                }
+            }
+        }
+    }
+    
     
     func weatherReceivedNotificationObserver(notification: NSNotification) {
         var weatherDict: Dictionary<String, Hourly> = notification.userInfo as! Dictionary<String, Hourly>
@@ -208,7 +238,7 @@ class ViewController: UIViewController {
     
     func dropPinOnLongTap(gestureRecognizer:UIGestureRecognizer){
         mapView.removeAnnotations(mapView.annotations)
-//        mapView.removeAnnotation(selectedPin!)
+        //        mapView.removeAnnotation(selectedPin!)
         let touchPoint = gestureRecognizer.location(in: mapView)
         let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
@@ -223,7 +253,7 @@ class ViewController: UIViewController {
         
         let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         addRadiusCircle(location: location, withRadiusInMetres: radiusMetres)
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -265,9 +295,9 @@ extension ViewController: HandleMapSearch {
         }
         
         mapView.addAnnotation(annotation)
-//        let span = MKCoordinateSpanMake(0.9, 0.9)
-//        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-//        mapView.setRegion(region, animated: true)
+        //        let span = MKCoordinateSpanMake(0.9, 0.9)
+        //        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        //        mapView.setRegion(region, animated: true)
         
         let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         addRadiusCircle(location: location, withRadiusInMetres: radiusMetres)
@@ -316,17 +346,17 @@ extension ViewController : MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let pinToZoom = view.annotation
-//        let span = MKCoordinateSpanMake(0.05, 0.05)
-//        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
-//        mapView.setRegion(region, animated: true)
+        //        let pinToZoom = view.annotation
+        //        let span = MKCoordinateSpanMake(0.05, 0.05)
+        //        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        //        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-//        let pinToZoom = view.annotation
-//        let span = MKCoordinateSpanMake(1.05, 1.05)
-//        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
-//        mapView.setRegion(region, animated: true)
+        //        let pinToZoom = view.annotation
+        //        let span = MKCoordinateSpanMake(1.05, 1.05)
+        //        let region = MKCoordinateRegion(center: pinToZoom!.coordinate, span: span)
+        //        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
