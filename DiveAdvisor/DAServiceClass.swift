@@ -33,7 +33,7 @@ class DAServiceClass {
         }
     }
     
-    static func diveSearchByGeo(lat: Double, lng: Double, dist: Int)  {
+    static func diveSearchByGeo(lat: Double, lng: Double, dist: Double)  {
         let url = DAUrlCreator.createDAURLWithComponents(term: .bySearchCoordDist(lat, lng, dist))
         alamoFireCall(url: url!, matchOn: .sites) {
             (result, sites, aNSerror) -> Void in
