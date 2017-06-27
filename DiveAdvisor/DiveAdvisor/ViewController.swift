@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         
         //Setup segment controls
         segmentControl.items = ["\(searchRadius.s.name)", "\(searchRadius.m.name)", "\(searchRadius.l.name)", "\(searchRadius.xl.name)"]
-        segmentControl.font = UIFont(name: "Avenir-Black", size: 12)
+        segmentControl.font = UIFont(name: "Avenir-Black", size: 16)
         segmentControl.borderColor = UIColor(white: 1.0, alpha: 0.3)
         segmentControl.selectedIndex = 0
         
