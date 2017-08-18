@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i7f-n4-hbg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i7f-n4-hbg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +27,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkS-To-Jmv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dlc-kH-8n1"/>
@@ -35,7 +35,7 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-Gx-Rhw" customClass="ADVSegmentedControl" customModule="DiveAdvisor" customModuleProvider="target">
-                                <rect key="frame" x="67" y="540" width="240" height="48"/>
+                                <rect key="frame" x="67" y="589" width="240" height="48"/>
                                 <color key="backgroundColor" red="0.36470588240000001" green="0.61176470589999998" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="mcO-0i-4I2"/>
@@ -74,7 +74,8 @@
                     <connections>
                         <outlet property="mapView" destination="nkS-To-Jmv" id="824-xk-qMl"/>
                         <outlet property="segmentControl" destination="Adr-Gx-Rhw" id="UkW-uP-Pb2"/>
-                        <segue destination="crX-7X-w5Q" kind="show" identifier="MapToDetail" id="8zU-cw-vbG"/>
+                        <segue destination="d0L-mC-TjZ" kind="show" identifier="MapToDetail" id="xZz-VR-Gpn"/>
+                        <segue destination="pt0-pX-4nr" kind="show" identifier="MapToWeb" id="1ae-fa-jbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -134,11 +135,12 @@
         <!--Navigation Controller-->
         <scene sceneID="KOc-Yj-wZA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oRF-Wx-giA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i7f-n4-hbg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="Z1U-Bk-Rzl"/>
                     <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V9q-Nn-7dL">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V9q-Nn-7dL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -147,17 +149,54 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bgp-Db-eNf"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oRF-Wx-giA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1743.5" y="123.5"/>
         </scene>
-        <!--Detail-->
-        <scene sceneID="OV7-Ki-Ijf">
+        <!--Detail Table View Controller-->
+        <scene sceneID="u90-YJ-M05">
             <objects>
-                <viewControllerPlaceholder storyboardName="Detail" id="crX-7X-w5Q" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L0u-DC-lEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="d0L-mC-TjZ" customClass="DetailTableViewController" customModule="DiveAdvisor" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="A6T-Rx-7ec">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="d0L-mC-TjZ" id="43g-os-Cjz"/>
+                            <outlet property="delegate" destination="d0L-mC-TjZ" id="CZw-TK-Vjt"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zJ-nf-5Xn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2550" y="556"/>
+            <point key="canvasLocation" x="3572" y="-232"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="HqX-qq-xzm">
+            <objects>
+                <viewController id="pt0-pX-4nr" customClass="WebViewController" customModule="DiveAdvisor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A5y-W8-Mci"/>
+                        <viewControllerLayoutGuide type="bottom" id="fG5-HV-d0i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ChB-Ou-vnx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xpa-Za-iYC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="xpa-Za-iYC" id="gYb-HF-tXE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YK8-po-VzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3572" y="501"/>
         </scene>
     </scenes>
 </document>

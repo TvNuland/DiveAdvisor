@@ -13,7 +13,7 @@ enum SearchTerm {
     //http://api.divesites.com/?mode=search&str=shark
     case bySearchName(String)
     //http://api.divesites.com/?mode=sites&lat=-8.348&lng=116.0563&dist=250
-    case bySearchCoordDist(Double, Double, Int)
+    case bySearchCoordDist(Double, Double, Double)
     //http://api.divesites.com/?mode=detail&siteid=17559
     case bySearchID(Int)
 }

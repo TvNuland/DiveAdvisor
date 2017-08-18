@@ -8,111 +8,93 @@
 
 import UIKit
 
-enum detailRows: Int {
-    case imageSliderRow = 0
-    case descriptionRow = 1
-    case weatherRow = 2
-    case detailRow = 3
-    case reviewRow = 4
-    
-    func positionAsInteger() -> Int {
-        switch self {
-        case .imageSliderRow:
-            return 0
-        case .descriptionRow:
-            return 1
-        case .weatherRow:
-            return 2
-        case .detailRow:
-            return 3
-        case .reviewRow:
-            return 4
-        }
-    }
-}
 
-class ExtensionDetailTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension DetailTableViewController: UITextViewDelegate{
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 4
+        return 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
+        switch indexPath.section { //NEED TO HAVE SECTIONS TO HAVE VARYING CELL HEIGHTS
+            
+        case detailRows.imageSliderRow.rawValue:
+            print("image slider")
+            
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "detailImageCellID", for: indexPath) as! DetailmageSliderCell
+            
+            imageCell.awakeFromNib()
+            imageCell.siteDetail = siteDetailObject
+            imageCell.separatorInset.left = view.frame.width
+            
+            return imageCell
+            
+            
+            
+        case detailRows.descriptionRow.rawValue:
+            let descriptionCell = tableView.dequeueReusableCell(withIdentifier: "descriptionTableViewCell", for: indexPath) as! DescriptionTableViewCell
+            
+            // must delegate back to view controller so it can auto resize
+            descriptionCell.DescriptionTextView.delegate = self
+            
+            //test encode html
+            let text = siteDetailObject?.description
+            let str = text?.replacingOccurrences(of: "<[^]>]+>", with: "", options: .regularExpression, range: nil)
+            
+            descriptionCell.DescriptionTextView.text = str
+            
+            return descriptionCell
+        
+        default: //weather cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCellID", for: indexPath) as! WeatherCell
+            cell.awakeFromNib()
 
-        return cell
+            if let detailWeatherObject = detailWeatherObject {
+                cell.setValuesOnWeatherInfo(detailWeatherObject: detailWeatherObject)
+            }
+            return cell
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+            
+        case detailRows.imageSliderRow.rawValue:
+            if siteDetailObject?.imageUrls == nil {
+                return 0
+            } else {
+                return view.percentage(type: .height, with: 40)
+            }
+        case detailRows.descriptionRow.rawValue:
+            return UITableViewAutomaticDimension
+        default:
+            return view.percentage(type: .height, with: 40)
+        }
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+}
+
+
+enum CalculationType {
+    case height
+    case width
+}
+
+extension UIView {
+    func percentage(type: CalculationType, with percentage: CGFloat) -> CGFloat {
+        
+        if type == .height {
+            return percentage * self.frame.height/100
+        } else {
+            return percentage * self.frame.width/100
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

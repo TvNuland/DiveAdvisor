@@ -32,6 +32,12 @@ public class SiteDetail {
 	public var equipment : String?
 	public var created_by : String?
     public var urls:[Urls]?
+    public var weblink: String?
+    public var imageUrls: [String] = ["http://cdn2.list25.com/wp-content/uploads/2013/04/Slide2242.jpg",
+                                      "http://www.scubadiving.com/sites/scubadiving.com/files/styles/large_1x_/public/import/2014/files/_images/201408/4-scu-advanced-dives-diving_uss-oriskany-pensacola-florida.jpg?itok=zaf6xePo",
+                                      "http://www.scubadiving.com/sites/scubadiving.com/files/styles/large_1x_/public/import/2014/files/_images/201408/8-scu-advanced-divesdiving_white-sea-russia.jpg?itok=82UwRIKT",
+                                      "http://www.scubadiving.com/sites/scubadiving.com/files/styles/large_1x_/public/import/2014/files/_images/201408/9b-scu-advanced-dives-diving_pelagic-magic-kona-coast-hawaii-2.jpg?itok=Xqpr7nBt"]
+    
 /**
     Returns an array of models based on given dictionary.
     
